@@ -29,9 +29,7 @@ class Blog extends Extension
        
             
         // Register events
-        $this->registerEvent('blog.create','Trigger after new blog post created');
-        $this->registerEvent('blog.edit','Trigger after blog post is edited');
-        $this->registerEvent('blog.delete','Trigger after blog post is deleted');     
+       
         // Create db tables
        // $this->createDbTable('CategorySchema');
       //  $this->createDbTable('CategoryDescriptionSchema');
