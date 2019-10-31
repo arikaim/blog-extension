@@ -1,0 +1,17 @@
+{
+    "title": "Blog",
+    "icon": "list",
+    "class": "Blog",
+    "type": "user",
+    "description": "Create blogs.",
+    "short_description": "Manage site blog post.",
+    "version": "1.0.0",
+    "position": "2",
+    "admin_menu": {        
+        "title": "Blog",
+        "icon": "list",
+        "page_title": "Blog",
+        "page_icon": "list",       
+        "component": "blog::admin"
+    }
+}
