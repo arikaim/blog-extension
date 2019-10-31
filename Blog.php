@@ -24,10 +24,8 @@ class Blog extends Extension
     */
     public function install()
     {
-       
-   
         // Control Panel
-        //$result = $this->addApiRoute('POST','/api/category/add','Category','add','session');   
+        $this->addApiRoute('POST','/api/category/add','Category','add','session');   
        
             
         // Register events
@@ -42,4 +40,15 @@ class Blog extends Extension
 
         return true;
     }   
+
+    /**
+     *  UnInstall extension
+     *
+     * @return boolean
+     */
+    public function unInstall()
+    {
+        return true;
+    }
+
 }
