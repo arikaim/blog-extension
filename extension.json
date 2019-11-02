@@ -1,6 +1,6 @@
 {
     "title": "Blog",
-    "icon": "list",
+    "name": "blog",
     "class": "Blog",
     "type": "user",
     "description": "Create blogs.",

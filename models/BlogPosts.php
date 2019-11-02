@@ -32,8 +32,8 @@ class BlogPosts extends Model
         Find,
         Slug,
         Status,
-        UserRelation
-        Translations,
+        UserRelation,
+        Translations;
       
     
     /**
