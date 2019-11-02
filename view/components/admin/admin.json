@@ -1,25 +1,14 @@
 {
-    "buttons": {
-        "view": {
-            "content": "View",
-            "title": "View"
-        },                
-        "add": {
-            "content": "Add",
-            "title": "Add New Category"
-        },
-        "edit": {
-            "content": "Edit",
-            "title": "Edit Category"
-        }     
-    },
     "messages": {
         "remove": {
             "title": "Confirm Remove",
-            "content": "Confirm remove category '<b><% title %></b>' and all sub categories."
+            "content": "Confirm remove post '<b><% title %></b>' and all sub categories."
         }
     },
     "labels": {
-        "language": "Language"
+        "language": "Language",
+        "pages": "Pages",
+        "posts": "Posts",
+        "add": "Add Page"
     }  
 }

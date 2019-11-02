@@ -9,9 +9,9 @@
     "position": "2",
     "admin_menu": {        
         "title": "Blog",
-        "icon": "list",
+        "icon": "blog",
         "page_title": "Blog",
-        "page_icon": "list",       
+        "page_icon": "blog",       
         "component": "blog::admin"
     }
 }

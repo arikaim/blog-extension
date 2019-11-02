@@ -25,8 +25,20 @@ class Blog extends Extension
     public function install()
     {
         // Control Panel
-        $this->addApiRoute('POST','/api/category/add','Category','add','session');   
-       
+        // Pages
+        $this->addApiRoute('POST','/api/blog/admin/page/add','BlogPageControlPanel','add','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/page/update','BlogPageControlPanel','update','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/page/status','BlogPageControlPanel','setStatus','session');   
+        $this->addApiRoute('DELETE','/api/blog/admin/page/delete','BlogPageControlPanel','delete','session');  
+        // Posts
+        $this->addApiRoute('POST','/api/blog/admin/post/add','BlogPostControlPanel','add','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/post/update','BlogPostControlPanel','update','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/post/status','BlogPostControlPanel','setStatus','session');   
+        $this->addApiRoute('DELETE','/api/blog/admin/post/delete','BlogPostControlPanel','delete','session');  
+        
+        // Blog pages
+        
+
         // Create db tables
         $this->createDbTable('BlogPostsSchema');
         $this->createDbTable('BlogPostTranslationsSchema');

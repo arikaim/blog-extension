@@ -7,26 +7,17 @@
  * @license     http://www.arikaim.com/license
  * 
 */
-namespace Arikaim\Extensions\Category\Controllers;
+namespace Arikaim\Extensions\Blog\Controllers;
 
 use Arikaim\Core\Db\Model;
 use Arikaim\Core\Controllers\ApiController;
 use Arikaim\Core\Arikaim;
-use Arikaim\Core\View\Template;
 
 /**
- * Blog control panel controler
+ * Blog posts control panel controler
 */
-class BlogControlPanel extends ApiController
+class BlogPostsControlPanel extends ApiController
 {
-    /**
-     * Add blog
-     *
-     * @param object $request
-     * @param object $response
-     * @param object $data
-     * @return object
-    */
     public function add($request, $response, $data) 
     {       
         $this->requireControlPanelPermission();
@@ -35,14 +26,6 @@ class BlogControlPanel extends ApiController
         return $this->getResponse();   
     }
 
-    /**
-     * Update blog
-     *
-     * @param object $request
-     * @param object $response
-     * @param object $data
-     * @return object
-    */
     public function update($request, $response, $data) 
     {    
         $this->requireControlPanelPermission();
@@ -51,14 +34,6 @@ class BlogControlPanel extends ApiController
         return $this->getResponse();
     }
 
-    /**
-     * Delete blog
-     *
-     * @param object $request
-     * @param object $response
-     * @param object $data
-     * @return object
-    */
     public function delete($request, $response, $data)
     { 
         $this->requireControlPanelPermission();
