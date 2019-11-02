@@ -35,9 +35,12 @@ class BlogPostsSchema extends Schema
         $table->id();     
         $table->prototype('uuid');       
         $table->status();
+        $table->position();
         $table->userId();
+        $table->relation($page_id,'routes');
+        $table->dateCreated();
+        $table->dateUpdated();
         // foreign keys
-       
     }
 
     /**

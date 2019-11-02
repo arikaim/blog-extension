@@ -7,21 +7,21 @@
  * @license     http://www.arikaim.com/license.html
  * 
 */
-namespace Arikaim\Extensions\Category\Models\Schema;
+namespace Arikaim\Extensions\Blog\Models\Schema;
 
 use Arikaim\Core\Db\Schema;
 
 /**
- * Category translations table
+ * Blog Post translations table
  */
-class CategoryTranslationsSchema extends Schema  
+class BlogPostTranslationsSchema extends Schema  
 {    
     /**
      * Table name
      *
      * @var string
      */
-    protected $tableName = "category_translations";
+    protected $tableName = "blog_post_translations";
 
     /**
      * Create table
@@ -31,10 +31,11 @@ class CategoryTranslationsSchema extends Schema
      */
     public function create($table) 
     {
-        $table->tableTranslations('category_id','category',function($table) {
-            $table->slug();
-            $table->string('title')->nullable(false);
-            $table->text('description')->nullable(true);
+        $table->tableTranslations('blog_post_id','blog_post',function($table) {           
+            $table->text('title')->nullable(false);
+            $table->longText('content')->nullable(false);
+
+            $table->index('title');
         });       
     }
 

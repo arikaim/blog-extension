@@ -1,2 +1,9 @@
+{% set items = [ 
+    { id: 'pages_button', title: labels.files.content, component: 'blog::admin.pages', icon: 'file alternate outline', active: true }     
+] %}
 
-
+{{  component('components:tabs',{ 
+        items: items,
+        content: { component: 'blog::admin' } 
+    })
+}}

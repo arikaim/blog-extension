@@ -27,15 +27,10 @@ class Blog extends Extension
         // Control Panel
         $this->addApiRoute('POST','/api/category/add','Category','add','session');   
        
-            
-        // Register events
-       
         // Create db tables
-       // $this->createDbTable('CategorySchema');
-      //  $this->createDbTable('CategoryDescriptionSchema');
-       
+        $this->createDbTable('BlogPostsSchema');
+        $this->createDbTable('BlogPostTranslationsSchema');
      
-
         return true;
     }   
 
@@ -48,5 +43,4 @@ class Blog extends Extension
     {
         return true;
     }
-
 }

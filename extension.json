@@ -4,7 +4,7 @@
     "class": "Blog",
     "type": "user",
     "description": "Create blogs.",
-    "short_description": "Manage site blog post.",
+    "short_description": "Create blogs.",
     "version": "1.0.0",
     "position": "2",
     "admin_menu": {        

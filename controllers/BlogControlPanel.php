@@ -66,34 +66,4 @@ class BlogControlPanel extends ApiController
         
         return $this->getResponse();     
     }
-    
-    /**
-     * Enable/Disable blog
-     *
-     * @param object $request
-     * @param object $response
-     * @param object $data
-     * @return object
-    */
-    public function setStatus($request, $response, $data)
-    {
-        $this->requireControlPanelPermission();
- 
-        return $this->getResponse();   
-    }
-
-    /**
-     * Read blog
-     *
-     * @param object $request
-     * @param object $response
-     * @param Validator $data
-     * @return object
-    */
-    public function read($request, $response, $data)
-    {
-        $this->requireControlPanelPermission();
-      
-        return $this->getResponse();  
-    }
 }
