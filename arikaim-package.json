@@ -1,17 +1,19 @@
 {
     "title": "Blog",
     "name": "blog",
+    "package-type": "extension",
     "class": "Blog",
     "type": "user",
     "description": "Create blogs.",
-    "short_description": "Create blogs.",
+    "short-description": "Create blogs.",
+    "repository": "https://github.com/arikaim/blog-extension.git",
     "version": "1.0.0",
     "position": "2",
-    "admin_menu": {        
+    "admin-menu": {        
         "title": "Blog",
         "icon": "blog",
-        "page_title": "Blog",
-        "page_icon": "blog",       
+        "page-title": "Blog",
+        "page-icon": "blog",       
         "component": "blog::admin"
     }
 }
