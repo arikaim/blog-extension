@@ -1,0 +1,10 @@
+{
+    "labels": {
+        "title": "Title",
+        "status": "Status",
+        "date": "Date"
+    },
+    "placeholders": {
+        "title": "Enter Post Title"
+    }
+}

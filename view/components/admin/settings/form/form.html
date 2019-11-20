@@ -1,0 +1,14 @@
+<form class="ui form" id="settings_form">   
+    <div class="field">
+        <label>{{ labels.route }}</label>
+        <input name="route" id="route" value="{{ page.name }}" placeholder="{{ placeholder.name }}">
+
+    </div>
+    <div class="field">
+        <div class="ui basic large label">            
+            {{ url('',true) }}   
+            <span id="slug"></span>                           
+        </div>  
+    </div>    
+    {{ component('components:form.footer') }}    
+</form>

@@ -3,8 +3,8 @@
  * Arikaim
  *
  * @link        http://www.arikaim.com
- * @copyright   Copyright (c) 2016-2018 Konstantin Atanasov <info@arikaim.com>
- * @license     http://www.arikaim.com/license.html
+ * @copyright   Copyright (c)  Konstantin Atanasov <info@arikaim.com>
+ * @license     http://www.arikaim.com/license
  * 
 */
 namespace Arikaim\Extensions\Blog\Models\Schema;
@@ -12,16 +12,16 @@ namespace Arikaim\Extensions\Blog\Models\Schema;
 use Arikaim\Core\Db\Schema;
 
 /**
- * Blog posts db table
+ * Pages db table
  */
-class BlogPostsSchema extends Schema  
+class PagesSchema extends Schema  
 {    
     /**
      * Table name
      *
      * @var string
      */
-    protected $tableName = "blog_posts";
+    protected $tableName = "pages";
 
    /**
      * Create table
@@ -33,14 +33,16 @@ class BlogPostsSchema extends Schema
     {            
         // columns    
         $table->id();     
-        $table->prototype('uuid');       
+        $table->prototype('uuid');
+        $table->string('name')->nullable(false);       
         $table->status();
-        $table->position();
+        $table->slug();
         $table->userId();
-        $table->relation($page_id,'routes');
         $table->dateCreated();
         $table->dateUpdated();
-        // foreign keys
+        $table->dateDeleted();
+        // index
+        $table->unique('name');
     }
 
     /**

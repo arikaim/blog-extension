@@ -1,0 +1,20 @@
+{% set pages = createModel('Pages','blog').orderBy('name') %}
+{% set items = paginate(pages,'pages') %}
+
+<div class="ui middle aligned divided list">
+    {% for item in items.getItems() %}
+        <div class="item">
+            <div class="left floated content">
+                <div class="ui basic icon mini button edit-page" uuid="{{ item.uuid }}">
+                    <i class="icon edit"></i>
+                </div>
+            </div>
+            <div class="middle aligned content">
+                <div class="header">{{ item.name }}</div>
+                <div class="description">
+                    {{ item.slug }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>  

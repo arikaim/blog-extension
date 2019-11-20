@@ -1,0 +1,42 @@
+<div class="ui segment">
+    <div class="ui stackable divided grid min-h-full">
+        <div class="five wide column">
+            <div class="ui small header">
+                <i class="bordered icon outline alternate file blue "></i>
+                <div class="content">
+                    {{ page.name }}
+                    <div class="sub header">
+                        <a class="ui icon tertiary button" href="{{ page.url }}" target="blog">
+                            <i class="external alternate blue icon"></i>
+                        </a>
+                        {{ page.url }}                                       
+                    </div>
+                </div>           
+            </div>
+        </div>
+        <div class="five wide column">
+            <div class="ui small header">
+                <i class="bordered icon pen fancy blue"></i>
+                <div class="content">
+                    {{ labels.posts }}
+                    <div class="sub header">
+                        <button class="ui tertiary blue button add-post">
+                            <i class="icon plus blue"></i>
+                            {{ labels.create }}
+                        </button>
+                    </div>
+                </div>           
+            </div>
+        </div>
+        <div class="two wide column right floated">
+            <div class="ui small header">
+                <i class="bordered icon check blue"></i>
+                <div class="content">
+                    {{ labels.status }}
+                </div>
+                <div class="sub header">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   

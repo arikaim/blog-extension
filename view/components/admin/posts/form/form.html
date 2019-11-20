@@ -1,0 +1,21 @@
+{% if uuid is not empty %}
+    {% set post = createModel('Posts','blog').findById(uuid) %}
+{% endif %}
+<form class="ui form" id="editor_form">
+    <input type="hidden" value="{{ page }}" name="page">
+    <div class="fields">
+        <div class="ten wide field">
+            <label>{{ labels.title }}</label>
+            <input name="title" type="text" placeholder="{{ placeholders.title }}" value="{{ post.title }}">
+        </div>
+        <div class="two wide field">
+            <label>{{ labels.status }}</label>
+        </div>
+        <div class="two wide field">
+            <label>{{ labels.date }}</label>
+            {{ today()|dateFormat }}
+        </div>
+    </div>
+    <textarea name="content" id="editor">{{ post.content }}</textarea>    
+    {{ component('components:form.footer') }}    
+</form>

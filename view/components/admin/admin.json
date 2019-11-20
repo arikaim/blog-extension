@@ -5,10 +5,8 @@
             "content": "Confirm remove post '<b><% title %></b>' and all sub categories."
         }
     },
-    "labels": {
-        "language": "Language",
-        "pages": "Pages",
-        "posts": "Posts",
-        "add": "Add Page"
+    "labels": {       
+        "editor": "Editor",       
+        "settings": "Settings"
     }  
 }

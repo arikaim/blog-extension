@@ -1,0 +1,9 @@
+{
+    "labels": {
+        "name": "Name",
+        "url": "Url"        
+    },
+    "placeholder": {
+        "name": "Enter Page Name"
+    }
+}

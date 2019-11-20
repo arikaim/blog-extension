@@ -1,0 +1,15 @@
+<form class="ui form" id="page_form">   
+    <input type="hidden" name="uuid" value="{{ uuid }}">
+    <div class="field">
+        <label>{{ labels.name }}</label>
+        <input name="name" id="name" value="{{ page.name }}" placeholder="{{ placeholder.name }}">
+    </div>
+    <div class="field">
+        <label>{{ labels.url }}</label>   
+        <div class="ui basic large label">            
+            {{ url('',true) }}   
+            <span id="slug"></span>                           
+        </div>  
+    </div>    
+    {{ component('components:form.footer') }}    
+</form>

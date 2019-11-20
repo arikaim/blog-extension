@@ -1,12 +1,10 @@
+{% set page = createModel('Pages','blog').findById(page) %}
+{% set posts = page.posts().count() %}
 
-<div class="ui stackable grid">
-    <div class="one wide column">
-        <butotn class="ui icon basic button add-page">
-            <i class="icon plus"></i>
-        </butotn>
-    </div>
-    <div class="ten wide column mt-10">   
-        {{ component('blog::admin.posts.new') }}                 
-    </div>
+<div class="mt-2">
+    {% if posts == 0 or posts is empty %}
+        {{ component('blog::admin.posts.add',{ page: page.uuid }) }}
+    {% else %}
+        {{ component('blog::admin.posts.list',{ page: page.uuid }) }}
+    {% endif %}
 </div>
-

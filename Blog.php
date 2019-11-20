@@ -3,7 +3,7 @@
  * Arikaim
  *
  * @link        http://www.arikaim.com
- * @copyright   Copyright (c) 2016-2018 Konstantin Atanasov <info@arikaim.com>
+ * @copyright   Copyright (c)  Konstantin Atanasov <info@arikaim.com>
  * @license     http://www.arikaim.com/license
  * 
 */
@@ -24,25 +24,22 @@ class Blog extends Extension
     */
     public function install()
     {
-        // Control Panel
-        // Pages
-        $this->addApiRoute('POST','/api/blog/admin/page/add','BlogPageControlPanel','add','session');   
-        $this->addApiRoute('PUT','/api/blog/admin/page/update','BlogPageControlPanel','update','session');   
-        $this->addApiRoute('PUT','/api/blog/admin/page/status','BlogPageControlPanel','setStatus','session');   
-        $this->addApiRoute('DELETE','/api/blog/admin/page/delete','BlogPageControlPanel','delete','session');  
-        // Posts
-        $this->addApiRoute('POST','/api/blog/admin/post/add','BlogPostControlPanel','add','session');   
-        $this->addApiRoute('PUT','/api/blog/admin/post/update','BlogPostControlPanel','update','session');   
-        $this->addApiRoute('PUT','/api/blog/admin/post/status','BlogPostControlPanel','setStatus','session');   
-        $this->addApiRoute('DELETE','/api/blog/admin/post/delete','BlogPostControlPanel','delete','session');  
-        
+        // Control Panel Pages       
+        $this->addApiRoute('POST','/api/blog/admin/page/add','PageControlPanel','add','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/page/update','PageControlPanel','update','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/page/status','PageControlPanel','setStatus','session');   
+        $this->addApiRoute('DELETE','/api/blog/admin/page/delete','PageControlPanel','delete','session');  
+        // Control Panel Posts
+        $this->addApiRoute('POST','/api/blog/admin/post/add','PostControlPanel','add','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/post/update','PostControlPanel','update','session');   
+        $this->addApiRoute('PUT','/api/blog/admin/post/status','PostControlPanel','setStatus','session');   
+        $this->addApiRoute('DELETE','/api/blog/admin/post/delete','PostControlPanel','delete','session');  
         // Blog pages
         
-
         // Create db tables
-        $this->createDbTable('BlogPostsSchema');
-        $this->createDbTable('BlogPostTranslationsSchema');
-     
+        $this->createDbTable('PagesSchema');
+        $this->createDbTable('PostsSchema');
+      
         return true;
     }   
 

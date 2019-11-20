@@ -1,10 +1,25 @@
-<div class="ui stackable grid">
-    <div class="one wide column">
-        <butotn class="ui icon basic button add-page">
-            <i class="icon plus"></i>
-        </butotn>
+<div class="ui stackable divided grid min-h-full">
+    <div class="two wide column  ">
+        <div class="pb-1">
+            <div class="ui small header">          
+                <i class="bordered icon file outline blue alternate"></i>
+                <div class="content">
+                    {{ labels.pages }}
+                    <div class="sub header">
+                        <a class="ui icon tertiary blue button add-page" {{ labels.create|attr('title') }}>
+                            <i class="icon blue plus"></i>
+                            {{ labels.create }}
+                        </a>
+                    </div>
+                </div>           
+            </div>
+        </div>       
+        <div class="ui divider"></div>
+        <div class="mt-4">           
+            {{ component('blog::admin.pages.list') }}
+        </div>
     </div>
-    <div class="four wide column mt-10">   
-        Page                 
+    <div class="fourteen wide column pt-0" id="page_editor" style="padding-top:0px">           
+        {{ component('blog::admin.pages.editor') }}                 
     </div>
 </div>

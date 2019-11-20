@@ -1,0 +1,12 @@
+{% if uuid is not empty %}
+    {% set page = createModel('Pages','blog').findById(uuid) %}
+    {% set posts = page.posts().count() %}
+{% endif %}
+<div>
+    {% if page is not empty %}
+        {{ component('blog::admin.pages.editor.header',{ page: page }) }}
+        <div class="mt-8" id="post_content">
+            {{ component('blog::admin.posts',{ page: uuid }) }}            
+        </div>
+    {% endif %}
+</div>

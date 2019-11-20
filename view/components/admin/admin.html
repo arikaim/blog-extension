@@ -1,6 +1,6 @@
 {% set items = [ 
-    { id: 'pages_button', title: labels.pages, component: 'blog::admin.pages', icon: 'file alternate outline', active: true },    
-    { id: 'posts_button', title: labels.posts, component: 'blog::admin.posts', icon: 'pen fancy' }     
+    { id: 'editor_button', title: labels.editor, component: 'blog::admin.pages', icon: 'edit', active: true },     
+    { id: 'settings_button', title: labels.settings, component: 'blog::admin.settings', icon: 'cogs' }     
 ] %}
 
 {{  component('components:tabs',{ 
