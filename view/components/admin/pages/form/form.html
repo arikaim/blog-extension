@@ -1,3 +1,6 @@
+{% if uuid is not empty %}
+{% set page = createModel('Pages','blog').findById(uuid) %}
+{% endif %}
 <form class="ui form" id="page_form">   
     <input type="hidden" name="uuid" value="{{ uuid }}">
     <div class="field">
@@ -8,7 +11,7 @@
         <label>{{ labels.url }}</label>   
         <div class="ui basic large label">            
             {{ url('',true) }}   
-            <span id="slug"></span>                           
+            <span id="slug">{{ page.slug }}</span>                           
         </div>  
     </div>    
     {{ component('components:form.footer') }}    

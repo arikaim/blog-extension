@@ -3,5 +3,7 @@ $(document).ready(function() {
         return blogControlPanel.updatePost('#editor_form');
     },function(result) {          
         arikaim.ui.form.showMessage(result.message);        
+    },function(error) {
+        arikaim.ui.form.showErrors(error);        
     });
 });

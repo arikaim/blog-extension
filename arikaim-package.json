@@ -2,7 +2,6 @@
     "title": "Blog",
     "name": "blog",
     "package-type": "extension",
-    "class": "Blog",
     "type": "user",
     "description": "Create blogs.",
     "short-description": "Create blogs.",

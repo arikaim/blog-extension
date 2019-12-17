@@ -1,4 +1,11 @@
 $(document).ready(function() {
+    $('.status-dropdown').dropdown({
+        onChange: function(value) {           
+            var uuid = $(this).attr('uuid');         
+            blogControlPanel.setPostStatus(uuid,value);
+        }       
+    });
+    
     arikaim.ui.form.addRules("#editor_form",{
         inline: false,
         fields: {
@@ -11,10 +18,5 @@ $(document).ready(function() {
         }
     });   
 
-    var editor = new SimpleMDE({
-        autofocus: true,
-        autoDownloadFontAwesome: true,
-        element: document.getElementById("editor")
-    });
+    var editor = posts.createEditor();
 });
-

@@ -11,12 +11,17 @@ namespace Arikaim\Extensions\Blog\Controllers;
 
 use Arikaim\Core\Db\Model;
 use Arikaim\Core\Controllers\ApiController;
+use Arikaim\Core\Controllers\Traits\Status;
+use Arikaim\Core\Controllers\Traits\SoftDelete;
 
 /**
  * Blog post control panel controler
 */
 class PostControlPanel extends ApiController
 {
+    use Status,
+        SoftDelete;
+
     /**
      * Init controller
      *
@@ -25,6 +30,15 @@ class PostControlPanel extends ApiController
     public function init()
     {
         $this->loadMessages('blog::admin.messages');
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct($container) 
+    {
+        parent::__construct($container);
+        $this->setModelClass('Posts');
     }
 
     /**
@@ -50,7 +64,7 @@ class PostControlPanel extends ApiController
                 'title'     => $title
             ];
             
-            $result = ($this->hasPost($title) == true) ? false : $post->create($info);
+            $result = ($post->hasPost($title,$page->id) == true) ? false : $post->create($info);
 
             $this->setResponse(is_object($result),function() use($result) {                                                       
                 $this
@@ -77,17 +91,22 @@ class PostControlPanel extends ApiController
         $this->requireControlPanelPermission();
 
         $this->onDataValid(function($data) {
-            $title = $data->get('title');           
+            $title = $data->get('title');                    
             $post = Model::Posts('blog')->findById($data['uuid']);
 
             $info = [               
                 'content'   => $data['content'],
-                'title'     => $title
+                'title'     => $title            
             ];
             
-            $result = ($this->hasPost($title) == false) ? false : $post->update($info);
+            if ($post->hasPost($title,$post->page_id) == true) {
+                $result = $post->update($info);               
+                $result = ($result !== false);
+            } else {
+                $result = false;
+            }
 
-            $this->setResponse(is_object($result),function() use($result) {                                                       
+            $this->setResponse($result,function() use($result) {                                                       
                 $this
                     ->message('post.update')
                     ->field('uuid',$result->uuid)
@@ -97,23 +116,5 @@ class PostControlPanel extends ApiController
         $data
             ->addRule('text:min=2','title')
             ->validate();           
-    }
-
-    /**
-     * Seft delete post
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
-    */
-    public function deleteController($request, $response, $data)
-    { 
-        $this->requireControlPanelPermission();
-
-        $this->onDataValid(function($data) {
-        });
-
-        $data->validate();    
     }
 }

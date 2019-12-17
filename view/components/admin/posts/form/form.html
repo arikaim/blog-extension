@@ -3,17 +3,39 @@
 {% endif %}
 <form class="ui form" id="editor_form">
     <input type="hidden" value="{{ page }}" name="page">
+    <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">
     <div class="fields">
-        <div class="ten wide field">
+        <div class="six wide field">
             <label>{{ labels.title }}</label>
             <input name="title" type="text" placeholder="{{ placeholders.title }}" value="{{ post.title }}">
         </div>
+        <div class="four wide field">
+            <label>{{ labels.category }}</label>
+            
+        </div>
         <div class="two wide field">
             <label>{{ labels.status }}</label>
+            {{ component('blog::admin.status.dropdown',{ selected: post.status, uuid: uuid, class: 'p-2' }) }}   
         </div>
         <div class="two wide field">
             <label>{{ labels.date }}</label>
-            {{ today()|dateFormat }}
+            {% if post.date_created is not null %}
+                <span class="ui pr-2 text grey">{{ labels.created }}</span> 
+                {{ post.date_created|dateFormat }}
+            {% endif %}
+            <br>
+            {% if post.date_updated is not null %}
+                <span class="ui pr-2 text grey">{{ labels.updated }}</span> 
+                {{ post.date_updated|dateFormat }}
+            {% endif %}
+        </div>
+        <div class="feild">
+            <label>View</label>         
+            <div title="{{ post.url }}">
+                <a class="ui icon tertiary button" href="{{ post.url }}" target="blog">
+                    <i class="external alternate blue icon"></i>
+                </a>                     
+            </div>           
         </div>
     </div>
     <textarea name="content" id="editor">{{ post.content }}</textarea>    

@@ -4,7 +4,7 @@
 {% endif %}
 <div>
     {% if page is not empty %}
-        {{ component('blog::admin.pages.editor.header',{ page: page }) }}
+        {{ component('blog::admin.pages.editor.header',{ page: page, status: page.status }) }}
         <div class="mt-8" id="post_content">
             {{ component('blog::admin.posts',{ page: uuid }) }}            
         </div>

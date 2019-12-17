@@ -2,6 +2,8 @@
     "labels": {        
         "posts": "Posts",
         "create": "Create",
+        "view": "View",
+        "edit": "Edit",
         "status": "Status"
     }
 }

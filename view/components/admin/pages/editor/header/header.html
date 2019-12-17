@@ -6,6 +6,10 @@
                 <div class="content">
                     {{ page.name }}
                     <div class="sub header">
+                        <button class="ui tertiary blue button edit-page-name" page-id="{{ page.id }}">
+                            <i class="icon edit blue"></i>
+                            {{ labels.edit }}
+                        </button>
                         <a class="ui icon tertiary button" href="{{ page.url }}" target="blog">
                             <i class="external alternate blue icon"></i>
                         </a>
@@ -20,7 +24,11 @@
                 <div class="content">
                     {{ labels.posts }}
                     <div class="sub header">
-                        <button class="ui tertiary blue button add-post">
+                        <button class="ui tertiary blue button view-posts" page-id="{{ page.id }}">
+                            <i class="icon list blue"></i>
+                            {{ labels.view }}
+                        </button>
+                        <button class="ui tertiary blue button add-post" page-id="{{ page.id }}">
                             <i class="icon plus blue"></i>
                             {{ labels.create }}
                         </button>
@@ -33,9 +41,10 @@
                 <i class="bordered icon check blue"></i>
                 <div class="content">
                     {{ labels.status }}
-                </div>
-                <div class="sub header">
-                </div>
+                    <div class="sub header ml-4 pl-2">
+                        {{ component('blog::admin.status.dropdown',{ selected: status, uuid: page.uuid, class: 'p-2' }) }}    
+                    </div>
+                </div>                
             </div>
         </div>
     </div>

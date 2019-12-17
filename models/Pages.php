@@ -14,14 +14,14 @@ use Illuminate\Database\Eloquent\Model;
 use Arikaim\Core\View\Html\Page;
 use Arikaim\Extensions\Blog\Models\Posts;
 
-use Arikaim\Core\Traits\Db\Uuid;
-use Arikaim\Core\Traits\Db\Slug;
-use Arikaim\Core\Traits\Db\Find;
-use Arikaim\Core\Traits\Db\Status;
-use Arikaim\Core\Traits\Db\UserRelation;
-use Arikaim\Core\Traits\Db\DateCreated;
-use Arikaim\Core\Traits\Db\DateUpdated;
-use Arikaim\Core\Traits\Db\SoftDelete;
+use Arikaim\Core\Db\Traits\Uuid;
+use Arikaim\Core\Db\Traits\Slug;
+use Arikaim\Core\Db\Traits\Find;
+use Arikaim\Core\Db\Traits\Status;
+use Arikaim\Core\Db\Traits\UserRelation;
+use Arikaim\Core\Db\Traits\DateCreated;
+use Arikaim\Core\Db\Traits\DateUpdated;
+use Arikaim\Core\Db\Traits\SoftDelete;
 
 /**
  * Pages model class
@@ -74,6 +74,16 @@ class Pages extends Model
     }
     
     /**
+     * Get published posts
+     * 
+     * @return Builder
+     */
+    public function getPublishedPosts()
+    {
+        return $this->posts()->where('status','=',1);
+    }
+
+    /**
      * Mutator (get) for url attribute.
      *
      * @return string
@@ -96,6 +106,40 @@ class Pages extends Model
         $model = ($id == null) ? $this : $this->findById($id);
 
         return Page::getUrl($model->slug,$full,$withLanguagePath);
+    }
+
+    /**
+     * Soft delete all posts
+     *
+     * @return boolean
+     */
+    public function softDeletePosts()
+    {
+        $errors = 0;
+        $posts = $this->posts()->get();
+        foreach ($posts as $post) {
+            $result = $post->softDelete();
+            $errors += ($result !== true) ? 1 : 0; 
+        }
+      
+        return ($errors == 0);
+    }
+
+    /**
+     * Restore soft deleted page posts
+     *
+     * @return boolean
+     */
+    public function restorePosts()
+    {
+        $errors = 0;
+        $posts = $this->posts()->get();
+        foreach ($posts as $post) {
+            $result = $post->restore();
+            $errors += ($result !== true) ? 1 : 0; 
+        }
+      
+        return ($errors == 0);
     }
 
     /**

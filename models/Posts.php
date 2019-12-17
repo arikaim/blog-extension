@@ -11,14 +11,17 @@ namespace Arikaim\Extensions\Blog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Arikaim\Core\Traits\Db\Uuid;
-use Arikaim\Core\Traits\Db\Slug;
-use Arikaim\Core\Traits\Db\Find;
-use Arikaim\Core\Traits\Db\Status;
-use Arikaim\Core\Traits\Db\UserRelation;
-use Arikaim\Core\Traits\Db\DateCreated;
-use Arikaim\Core\Traits\Db\DateUpdated;
-use Arikaim\Core\Traits\Db\SoftDelete;
+use Arikaim\Core\View\Html\Page;
+use Arikaim\Extensions\Blog\Models\Pages;
+
+use Arikaim\Core\Db\Traits\Uuid;
+use Arikaim\Core\Db\Traits\Slug;
+use Arikaim\Core\Db\Traits\Find;
+use Arikaim\Core\Db\Traits\Status;
+use Arikaim\Core\Db\Traits\UserRelation;
+use Arikaim\Core\Db\Traits\DateCreated;
+use Arikaim\Core\Db\Traits\DateUpdated;
+use Arikaim\Core\Db\Traits\SoftDelete;
 
 /**
  * Posts model class
@@ -41,6 +44,11 @@ class Posts extends Model
      */
     protected $table = "posts";
 
+    /**
+     * Fillable attributes
+     *
+     * @var array
+     */
     protected $fillable = [
         'position',       
         'status',
@@ -53,22 +61,90 @@ class Posts extends Model
         'date_deleted',
         'user_id'
     ];
-   
+    
+    /**
+     * Disable timestamps
+     *
+     * @var boolean
+     */
     public $timestamps = false; 
+
+
+    /**
+     * Page relation
+     *
+     * @return mixed
+     */  
+    public function page()
+    {
+        return $this->belongsTo(Pages::class,'page_id');
+    }
 
     /**
      * Return true if post exist
      *
-     * @param string|integer $id Model Id, Uuid or Title
+     * @param string $integer Title
      * @return boolean
      */
-    public function hasPost($id)
+    public function hasPost($title, $pageId = null)
     {
-        $model = $this->findById($id);
-        if (is_object($model) == false) {
-            $model = $this->findByColumn($id,'title');
-        }
+        $model = $this
+            ->where('title','=',$title)
+            ->where('page_id','=',$pageId)->first();
 
         return is_object($model);
+    }
+
+    /**
+     * Get published posts
+     *
+     * @param integer $pageId
+     * @return Builder
+     */
+    public function getPublishedPosts($pageId)
+    {
+        return $this->where('page_id','=',$pageId)->where('status','=',1);
+    }
+
+    /**
+     * Mutator (get) for url attribute.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return $this->getUrl();
+    }
+
+    /**
+     * Get post
+     *
+     * @param integer $pageId
+     * @param string $slug
+     * @return Model
+     */
+    public function getPost($pageId, $slug)
+    {
+        $model = $this->getPublishedPosts($pageId);
+        $model = $model->where('slug','=',$slug)->first();
+
+        return (is_object($model) == true) ? $model : false;
+    }
+
+    /**
+     * Get post url
+     *
+     * @param string|integer|null $id
+     * @param boolean $full
+     * @param boolean $withLanguagePath
+     * @return string
+     */
+    public function getUrl($id = null, $full = true, $withLanguagePath = false)
+    {
+        $model = ($id == null) ? $this : $this->findById($id);
+        $page = $model->page()->first();        
+        $url = $page->slug . "/" . $model->slug;
+    
+        return Page::getUrl($url,$full,$withLanguagePath);
     }
 }

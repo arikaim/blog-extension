@@ -1,6 +1,7 @@
 {% set items = [ 
     { id: 'editor_button', title: labels.editor, component: 'blog::admin.pages', icon: 'edit', active: true },     
-    { id: 'settings_button', title: labels.settings, component: 'blog::admin.settings', icon: 'cogs' }     
+    { id: 'settings_button', title: labels.settings, component: 'blog::admin.settings', icon: 'cogs' },   
+    { id: 'trash_button', title: labels.trash, component: 'blog::admin.trash', icon: 'trash' }     
 ] %}
 
 {{  component('components:tabs',{ 

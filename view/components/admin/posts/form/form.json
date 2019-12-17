@@ -2,7 +2,10 @@
     "labels": {
         "title": "Title",
         "status": "Status",
-        "date": "Date"
+        "date": "Date",
+        "category": "Category",
+        "created": "Created",
+        "updated": "Updated"
     },
     "placeholders": {
         "title": "Enter Post Title"
