@@ -18,6 +18,15 @@ function PagesControlPanel() {
         });
     };
 
+    this.showPagesList = function() {
+        return arikaim.page.loadContent({
+            id: 'pages_list',           
+            component: 'blog::admin.pages.list'            
+        },function(result) {
+            self.initRows();
+        });  
+    };
+
     this.initRows = function() {
         var component = arikaim.component.get('blog::admin');
         var removeMessage = component.getProperty('messages.page.content');
