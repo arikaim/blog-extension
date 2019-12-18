@@ -71,6 +71,7 @@ class PostControlPanel extends ApiController
                 $this
                     ->message('post.add')
                     ->field('uuid',$result->uuid)
+                    ->field('page_id',$result->page_id)
                     ->field('slug',$result->slug);           
             },'errors.post.add');
         });

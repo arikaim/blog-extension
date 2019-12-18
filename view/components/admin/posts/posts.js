@@ -40,6 +40,17 @@ function PostsControlPanel() {
         });
     };
 
+    this.loadEditPost = function(uuid, pageId) {
+        return arikaim.page.loadContent({
+            id: 'post_content',           
+            component: 'blog::admin.posts.edit',
+            params: { 
+                uuid: uuid,
+                page_id: pageId 
+            }
+        });  
+    };
+
     this.initRows = function() {
         var component = arikaim.component.get('blog::admin');
         var removeMessage = component.getProperty('messages.remove.content');
@@ -48,14 +59,7 @@ function PostsControlPanel() {
             var uuid = $(element).attr('uuid');
             var pageId = $(element).attr('page-id');
 
-            return arikaim.page.loadContent({
-                id: 'post_content',           
-                component: 'blog::admin.posts.edit',
-                params: { 
-                    uuid: uuid,
-                    page_id: pageId 
-                }
-            });  
+            return self.loadEditPost(uuid,pageId);
         });
 
         arikaim.ui.button('.delete-post',function(element) {
