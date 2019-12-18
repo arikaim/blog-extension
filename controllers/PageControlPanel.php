@@ -37,6 +37,7 @@ class PageControlPanel extends ApiController
     {
         parent::__construct($container);
         $this->setModelClass('Pages');
+        $this->setExtensionName('Blog');
     }
 
     /**

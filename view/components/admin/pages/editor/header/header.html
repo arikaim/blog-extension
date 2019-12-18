@@ -42,7 +42,7 @@
                 <div class="content">
                     {{ labels.status }}
                     <div class="sub header ml-4 pl-2">
-                        {{ component('blog::admin.status.dropdown',{ selected: status, uuid: page.uuid, class: 'p-2' }) }}    
+                        {{ component('blog::admin.status.dropdown',{ id: 'page_status', selected: status, uuid: page.uuid, class: 'p-2' }) }}    
                     </div>
                 </div>                
             </div>

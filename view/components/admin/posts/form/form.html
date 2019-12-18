@@ -15,7 +15,7 @@
         </div>
         <div class="two wide field">
             <label>{{ labels.status }}</label>
-            {{ component('blog::admin.status.dropdown',{ selected: post.status, uuid: uuid, class: 'p-2' }) }}   
+            {{ component('blog::admin.status.dropdown',{ id: 'post_status', selected: post.status, uuid: uuid, class: 'p-2' }) }}   
         </div>
         <div class="two wide field">
             <label>{{ labels.date }}</label>

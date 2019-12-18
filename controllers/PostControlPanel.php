@@ -39,6 +39,7 @@ class PostControlPanel extends ApiController
     {
         parent::__construct($container);
         $this->setModelClass('Posts');
+        $this->setExtensionName('Blog');
     }
 
     /**
