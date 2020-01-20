@@ -12,7 +12,7 @@ namespace Arikaim\Extensions\Blog\Subscribers;
 use Arikaim\Core\Events\EventSubscriber;
 use Arikaim\Core\Interfaces\Events\EventSubscriberInterface;
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Arikaim;
+use Arikaim\Core\Routes\Route;
 
 /**
  * Sitemap subscriber class
@@ -48,7 +48,7 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
             return $this->getCategoryPages($params,100);       
         }  
 
-        $url = Arikaim::routes()->getRouteUrl($params['pattern']);
+        $url = Route::getRouteUrl($params['pattern']);
 
         return (empty($url) == false) ? [$url] : null;  
     }
@@ -67,7 +67,7 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
         });
         foreach ($category as $item) {
             $slug = $item->translation()->slug;
-            $url = Arikaim::routes()->getRouteUrl($route['pattern'],['slug' => $slug]);
+            $url = Route::getRouteUrl($route['pattern'],['slug' => $slug]);
             $pages[] = $url;
         }     
 
@@ -86,7 +86,7 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
         $games = Model::Games('arcade')->getActive()->get();               
          
         foreach ($games as $item) {          
-            $url = Arikaim::routes()->getRouteUrl($route['pattern'],['slug' => $item->slug]);
+            $url = Route::getRouteUrl($route['pattern'],['slug' => $item->slug]);
             $pages[] = $url;
         }      
 
@@ -110,7 +110,7 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
                
         foreach ($tags as $item) {     
             $word = $item->translation()->word;     
-            $url = Arikaim::routes()->getRouteUrl($route['pattern'],['tag' => $word]);
+            $url = Route::getRouteUrl($route['pattern'],['tag' => $word]);
             $pages[] = $url;
         }      
 

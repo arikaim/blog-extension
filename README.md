@@ -3,15 +3,21 @@
 ![license: GPL3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 
+Blogging platform for Arikaim CMS
+
 
 #### Requirements 
   * [Arikaim CMS](https://github.com/arikaim/arikaim)
-
+  * [Blog template](https://github.com/arikaim/blog-template)
 
 
 #### Install
+
+With composer:
+
 ```bash 
 
 composer require arikaim/blog-extension
 
 ```
+

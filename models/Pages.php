@@ -44,6 +44,11 @@ class Pages extends Model
      */
     protected $table = "pages";
 
+    /**
+     * Fillable columns
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',       
         'status',
@@ -84,6 +89,26 @@ class Pages extends Model
     }
 
     /**
+     * Get page url prefix
+     *
+     * @return string
+     */
+    public static function getUrlPrefix()
+    {
+        return "/blog/page/";
+    }
+
+    /**
+     * Get category page url
+     *
+     * @return string
+     */
+    public function getCategotyPageUrl()
+    {
+        return "/blog/category/{{slug}}";
+    }
+
+    /**
      * Mutator (get) for url attribute.
      *
      * @return string
@@ -104,8 +129,8 @@ class Pages extends Model
     public function getUrl($id = null, $full = true, $withLanguagePath = false)
     {
         $model = ($id == null) ? $this : $this->findById($id);
-
-        return Page::getUrl($model->slug,$full,$withLanguagePath);
+       
+        return Page::getUrl(Self::getUrlPrefix() . $model->slug,$full,$withLanguagePath);
     }
 
     /**

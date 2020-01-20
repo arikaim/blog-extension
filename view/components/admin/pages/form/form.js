@@ -1,8 +1,4 @@
-$(document).ready(function() {
-    $('#name').keyup(function() {
-        var slug = arikaim.text.createSlug($(this).val());
-        $('#slug').html(slug);      
-    });
+$(document).ready(function() {   
     // init form
     arikaim.ui.form.addRules("#page_form",{
         inline: false,

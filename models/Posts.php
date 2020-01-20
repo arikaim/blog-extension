@@ -22,6 +22,7 @@ use Arikaim\Core\Db\Traits\UserRelation;
 use Arikaim\Core\Db\Traits\DateCreated;
 use Arikaim\Core\Db\Traits\DateUpdated;
 use Arikaim\Core\Db\Traits\SoftDelete;
+use Arikaim\Extensions\Category\Models\Traits\CategoryRelations;
 
 /**
  * Posts model class
@@ -35,6 +36,7 @@ class Posts extends Model
         DateCreated,
         DateUpdated,
         SoftDelete,
+        CategoryRelations,
         UserRelation;
     
     /**
@@ -63,12 +65,36 @@ class Posts extends Model
     ];
     
     /**
+     * Visible columns
+     *
+     * @var array
+     */
+    protected $visible = [
+        'uuid',           
+        'date_created',      
+        'slug',
+        'title',  
+        'date_updated',
+        'key',
+        'categories',
+        'content'              
+    ];
+
+    /**
+     * Include relations
+     *
+     * @var array
+     */
+    protected $with = [              
+        'categories'
+    ];
+
+    /**
      * Disable timestamps
      *
      * @var boolean
      */
     public $timestamps = false; 
-
 
     /**
      * Page relation
@@ -78,6 +104,16 @@ class Posts extends Model
     public function page()
     {
         return $this->belongsTo(Pages::class,'page_id');
+    }
+
+    /**
+     * Get page url prefix
+     *
+     * @return string
+     */
+    public static function getUrlPrefix()
+    {
+        return "/post/";
     }
 
     /**
@@ -143,7 +179,7 @@ class Posts extends Model
     {
         $model = ($id == null) ? $this : $this->findById($id);
         $page = $model->page()->first();        
-        $url = $page->slug . "/" . $model->slug;
+        $url = Self::getUrlPrefix() . $page->slug . "/" . $model->slug;
     
         return Page::getUrl($url,$full,$withLanguagePath);
     }

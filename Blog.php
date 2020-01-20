@@ -20,7 +20,7 @@ class Blog extends Extension
     /**
      * Install extension routes, events, jobs
      *
-     * @return boolean
+     * @return void
     */
     public function install()
     {
@@ -40,30 +40,31 @@ class Blog extends Extension
         $this->addApiRoute('DELETE','/api/blog/admin/trash/empty','PageControlPanel','emptyTrash','session');  
 
         // Blog pages
-        $this->addPageRoute('/{slug}','Blog','showBlogPage','blog:page');
-        $this->addPageRoute('/','Blog','showBlogPage','blog:page');
-        $this->addPageRoute('/{slug^(?!category)$}/{postSlug}','Blog','showBlogPost','blog:post');
-        $this->addPageRoute('/category/{slug}','Blog','showCategoryPage','blog:category');
+        $this->addHomePageRoute('/[{page:\d+}]','Blog','showBlog','blog>blog-page');
+        $this->addPageRoute('/blog/page/{slug}[/{page:\d+}]','Blog','showBlog','blog>blog-page');
+        $this->addPageRoute('/blog/category/{slug}[/{page:\d+}]','Blog','showCategory','blog>blog-category');      
+        $this->addPageRoute('/post/{slug}/{postSlug}','Blog','showBlogPost','blog>blog-post');
+        
+        // Relation map 
+        $this->addRelationMap('post','Posts');
+
         // Create db tables
         $this->createDbTable('PagesSchema');
         $this->createDbTable('PostsSchema');
         
         // create blog categories
-        $categories = Model::Category('category',function($model) {
+        Model::Category('category',function($model) {
             $items = ['News','Travel','Lifestyle'];                
             return $model->createFromArray($items,null,'en','blog');           
         });
-
-        return true;
     }   
 
     /**
      *  UnInstall extension
      *
-     * @return boolean
+     * @return void
      */
     public function unInstall()
     {
-        return true;
     }
 }
