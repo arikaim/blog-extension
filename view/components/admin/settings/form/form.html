@@ -1,14 +1,8 @@
-<form class="ui form" id="settings_form">   
+{% set posts_per_page = getOption('blog.posts.perpage') %}
+<form class="ui form" id="blog_settings">   
     <div class="field">
-        <label>{{ labels.route }}</label>
-        <input name="route" id="route" value="{{ page.name }}" placeholder="{{ placeholder.name }}">
-
+        <label>{{ labels.perpage }}</label>
+        <input id="blog_posts_perpage" name="blog.posts.perpage" type="text" value="{{ posts_per_page }}">
     </div>
-    <div class="field">
-        <div class="ui basic large label">            
-            {{ url('',true) }}   
-            <span id="slug"></span>                           
-        </div>  
-    </div>    
     {{ component('components:form.footer') }}    
 </form>

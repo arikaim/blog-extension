@@ -1,5 +1,6 @@
 {
     "labels": {
-        "route": "Blog pages route"
+        "route": "Blog pages route",
+        "perpage": "Post per page"
     }
 }

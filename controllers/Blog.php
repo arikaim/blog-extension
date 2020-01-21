@@ -31,7 +31,7 @@ class Blog extends Controller
     { 
         $slug = $data['slug'];
         $page = $data->get('page',1);
-        $perPage = 7;
+        $perPage = $this->get('options')->get('blog.posts.perpage',7);
 
         $categoryTranslation = Model::CategoryTranslations('category',function($model) use($data) {                
             return $model->findBySlug($data['slug']);  
@@ -66,7 +66,7 @@ class Blog extends Controller
     {       
         $slug = $data->get('slug',null);
         $currentPage = $data->get('page',1);
-        $perPage = 7;
+        $perPage = $this->get('options')->get('blog.posts.perpage',7);
 
         $pages = Model::Pages('blog');
         $posts = Model::Posts('blog')->getActive();
