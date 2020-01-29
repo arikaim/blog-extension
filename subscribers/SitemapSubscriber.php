@@ -38,13 +38,13 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
     {     
         $params = $event->getParameters();
 
-        if ($params['page_name'] == 'blog:page') {
+        if ($params['page_name'] == 'blog>blog-page') {
             return $this->getBlogPages($params);       
-        }    
-        if ($params['page_name'] == 'blog:post') {
+        }           
+        if ($params['page_name'] == 'blog>blog-post') {
             return $this->getBlogPostPages($params);       
         }  
-        if ($params['page_name'] == 'blog:category') {
+        if ($params['page_name'] == 'blog>blog-category') {
             return $this->getCategoryPages($params,100);       
         }  
 
@@ -63,14 +63,14 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
     {
         $pages = [];
         $category = Model::Category('category',function($model) {                
-            return $model->getActive()->get();           
+            return $model->getActive()->where('branch','=','blog')->get();           
         });
         foreach ($category as $item) {
             $slug = $item->translation()->slug;
             $url = Route::getRouteUrl($route['pattern'],['slug' => $slug]);
             $pages[] = $url;
         }     
-
+        
         return $pages;
     }
 
@@ -83,10 +83,14 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
     public function getBlogPostPages($route)
     {
         $pages = [];
-        $games = Model::Games('arcade')->getActive()->get();               
+        $posts = Model::Posts('blog')->getActive()->get();               
+        
+        foreach ($posts as $item) {               
+            $url = Route::getRouteUrl($route['pattern'],[
+                'slug' => $item->page->slug,
+                'postSlug' => $item->slug
+            ]);
          
-        foreach ($games as $item) {          
-            $url = Route::getRouteUrl($route['pattern'],['slug' => $item->slug]);
             $pages[] = $url;
         }      
 
@@ -96,21 +100,16 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
     /**
      * Get blog pages
      *
-     * @param array $route
-     * @param integer $maxItems
+     * @param array $route    
      * @return array
      */
-    public function getBlogPages($route, $maxItems = null)
+    public function getBlogPages($route)
     {
         $pages = [];
-        $tags = Model::Tags('tags',function($model) use($maxItems) {   
-            $query = $model->orderBy('id');            
-            return (empty($maxItems) == true) ? $query->get() : $query->take($maxItems)->get();           
-        });         
-               
-        foreach ($tags as $item) {     
-            $word = $item->translation()->word;     
-            $url = Route::getRouteUrl($route['pattern'],['tag' => $word]);
+        $model = Model::Pages('blog')->getActive()->get();     
+        
+        foreach ($model as $item) {     
+            $url = Route::getRouteUrl($route['pattern'],['slug' => $item->slug]);
             $pages[] = $url;
         }      
 
