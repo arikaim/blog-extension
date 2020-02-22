@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {
     safeCall('pages',function(obj) {
         obj.initRows();

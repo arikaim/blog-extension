@@ -4,6 +4,7 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
+'use strict';
 
 function BlogControlPanel() {
     var self = this;
@@ -25,6 +26,7 @@ function BlogControlPanel() {
             uuid: uuid,
             status: status
         };
+        
         return arikaim.put('/api/blog/admin/page/status',data,onSuccess,onError);          
     };
     

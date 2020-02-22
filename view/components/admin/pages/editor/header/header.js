@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {   
     $('#page_status').dropdown({
         onChange: function(value) {           

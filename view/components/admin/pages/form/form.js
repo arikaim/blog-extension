@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {   
     // init form
     arikaim.ui.form.addRules("#page_form",{

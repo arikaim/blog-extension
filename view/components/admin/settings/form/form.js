@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {
     arikaim.ui.form.addRules("#blog_settings",{
         inline: false,

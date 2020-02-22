@@ -4,6 +4,6 @@
     },
     "access": {
         "auth": "session",
-        "permissions": "ControlPanel:full"           
+        "permission": "ControlPanel:full"           
     }
 }

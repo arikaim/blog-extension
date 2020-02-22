@@ -6,7 +6,7 @@
     "description": "Create blogs.",
     "short-description": "Create blogs.",
     "repository": "https://github.com/arikaim/blog-extension.git",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "position": "2",
     "admin-menu": {        
         "title": "Blog",
