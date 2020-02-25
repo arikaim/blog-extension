@@ -74,17 +74,17 @@ class Blog extends Controller
         if (empty($slug) == false) {
             $page = $pages->findBySlug($slug);      
             if (is_object($page) == false) {
-                return $this->pageNotFound($response,$data);
+                return false;
             } 
     
             if ($page->status != $page->ACTIVE()) {
                 // page not published
-                return $this->pageNotFound($response,$data);
+                return false;
             }
     
             if ($page->isDeleted() == true) {
                 // page is deleted
-                return $this->pageNotFound($response,$data);
+                return false;
             }
         }
         if (is_object($page) == true) {
@@ -113,22 +113,22 @@ class Blog extends Controller
 
         $page = $pages->findBySlug($slug);      
         if (is_object($page) == false) {          
-            return $this->pageNotFound($response,$data);
+            return false;
         } 
 
         $post = $posts->getPost($page->id,$postSlug);
         if (is_object($post) == false) {
-            return $this->pageNotFound($response,$data);
+            return false;
         } 
 
         if ($post->status != $post->ACTIVE()) {
             // post not published
-            return $this->pageNotFound($response,$data);
+            return false;
         }
 
         if ($post->isDeleted() == true) {
             // post is deleted
-            return $this->pageNotFound($response,$data);
+            return false;
         }
 
         $data['uuid'] = $post->uuid;   
