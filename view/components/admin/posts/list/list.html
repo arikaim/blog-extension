@@ -2,9 +2,6 @@
 {% set posts = createModel('Posts','blog').getNotDeletedQuery().where('page_id','=',page.id) %}
 {% set items = paginate(posts,'posts') %}
 
-<div class="mt-8">
-   
-</div>
 <div class="ui list mt-4">
     {% for item in items.getItems() %}
     <div class="item" id="{{ item.uuid }}">

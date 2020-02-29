@@ -32,6 +32,7 @@ class Blog extends Controller
         $slug = $data['slug'];
         $page = $data->get('page',1);
         $perPage = $this->get('options')->get('blog.posts.perpage',7);
+        $pageUrl = $this->getParam('page_url','/blog/category/');
 
         $categoryTranslation = Model::CategoryTranslations('category',function($model) use($data) {                
             return $model->findBySlug($data['slug']);  
@@ -45,7 +46,7 @@ class Blog extends Controller
         $data['category'] = $categoryTranslation->category;
         $data['categoryTitle'] = Arrays::toString($categoryTranslation->category->getTitle());
         $data['paginator'] = Paginator::create($posts,$page,$perPage);
-        $data['page_url'] = "/blog/category/" . $slug;
+        $data['page_url'] = $pageUrl . $slug;
 
         $this->get('page')->head()
             ->param('category',$data['categoryTitle'])          
@@ -65,14 +66,17 @@ class Blog extends Controller
     public function showBlogPage($request, $response, $data) 
     {       
         $slug = $data->get('slug',null);
+        $pageUrl = $this->getParam('page_url','/blog/');
+
         $currentPage = $data->get('page',1);
         $perPage = $this->get('options')->get('blog.posts.perpage',7);
 
         $pages = Model::Pages('blog');
-        $posts = Model::Posts('blog')->getActive();
+        $posts = Model::Posts('blog')->getNotDeletedQuery()->where('status','=',1);
 
         if (empty($slug) == false) {
-            $page = $pages->findBySlug($slug);      
+            $page = $pages->findBySlug($slug);    
+          
             if (is_object($page) == false) {
                 return false;
             } 
@@ -87,10 +91,12 @@ class Blog extends Controller
                 return false;
             }
         }
+       
         if (is_object($page) == true) {
-            $posts = $posts->where('page_id','=',$page->id);
+           // var_dump($page);
+            $posts = $posts->where('page_id','=',$page->id);          
             $data['page_title'] = $page->name;
-            $data['page_url'] = "/blog/" . $slug;
+            $data['page_url'] = $pageUrl . $slug;
         } 
         
         $data['paginator'] = Paginator::create($posts,$currentPage,$perPage);       
