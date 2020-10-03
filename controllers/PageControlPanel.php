@@ -59,7 +59,7 @@ class PageControlPanel extends ApiController
             $result = $page->create([
                 'name' => $pageName
             ]);
-            $this->setResponse(is_object($result),function() use($result) {                                                       
+            $this->setResponse(\is_object($result),function() use($result) {                                                       
                 $this
                     ->message('page.add')
                     ->field('uuid',$result->page)
@@ -157,7 +157,7 @@ class PageControlPanel extends ApiController
             $page = Model::Pages('blog')->findById($uuid);
             
             $result = false;
-            if (is_object($page) == true) {
+            if (\is_object($page) == true) {
                 $page->restorePosts();
                 $result = $page->restore();
             } 

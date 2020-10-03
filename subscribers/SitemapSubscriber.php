@@ -87,7 +87,7 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
         
         foreach ($posts as $item) {               
             $url = Route::getRouteUrl($route['pattern'],[
-                'slug' => $item->page->slug,
+                'slug'     => $item->page->slug,
                 'postSlug' => $item->slug
             ]);
          

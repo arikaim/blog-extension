@@ -67,7 +67,7 @@ class PostControlPanel extends ApiController
             
             $result = ($post->hasPost($title,$page->id) == true) ? false : $post->create($info);
 
-            $this->setResponse(is_object($result),function() use($result) {                                                       
+            $this->setResponse(\is_object($result),function() use($result) {                                                       
                 $this
                     ->message('post.add')
                     ->field('uuid',$result->uuid)
@@ -108,11 +108,11 @@ class PostControlPanel extends ApiController
                 $result = false;
             }
 
-            $this->setResponse($result,function() use($result) {                                                       
+            $this->setResponse($result,function() use($post) {                                                       
                 $this
                     ->message('post.update')
-                    ->field('uuid',$result->uuid)
-                    ->field('slug',$result->slug);           
+                    ->field('uuid',$post->uuid)
+                    ->field('slug',$post->slug);           
             },'errors.post.update');
         });
         $data

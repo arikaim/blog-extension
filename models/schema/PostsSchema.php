@@ -21,7 +21,7 @@ class PostsSchema extends Schema
      *
      * @var string
      */
-    protected $tableName = "posts";
+    protected $tableName = 'posts';
 
     /**
      * Create table

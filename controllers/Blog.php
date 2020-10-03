@@ -74,26 +74,23 @@ class Blog extends Controller
         $pages = Model::Pages('blog');
         $posts = Model::Posts('blog')->getNotDeletedQuery()->where('status','=',1);
 
+        $page = null;
         if (empty($slug) == false) {
             $page = $pages->findBySlug($slug);    
-          
-            if (is_object($page) == false) {
+            if (\is_object($page) == false) {
                 return false;
             } 
-    
             if ($page->status != $page->ACTIVE()) {
                 // page not published
                 return false;
             }
-    
             if ($page->isDeleted() == true) {
                 // page is deleted
                 return false;
             }
         }
        
-        if (is_object($page) == true) {
-           // var_dump($page);
+        if (\is_object($page) == true) {
             $posts = $posts->where('page_id','=',$page->id);          
             $data['page_title'] = $page->name;
             $data['page_url'] = $pageUrl . $slug;
@@ -118,12 +115,12 @@ class Blog extends Controller
         $posts = Model::Posts('blog');  
 
         $page = $pages->findBySlug($slug);      
-        if (is_object($page) == false) {          
+        if (\is_object($page) == false) {          
             return false;
         } 
 
         $post = $posts->getPost($page->id,$postSlug);
-        if (is_object($post) == false) {
+        if (\is_object($post) == false) {
             return false;
         } 
 

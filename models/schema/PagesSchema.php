@@ -21,7 +21,7 @@ class PagesSchema extends Schema
      *
      * @var string
      */
-    protected $tableName = "pages";
+    protected $tableName = 'pages';
 
    /**
      * Create table

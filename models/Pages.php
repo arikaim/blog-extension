@@ -42,7 +42,7 @@ class Pages extends Model
      *
      * @var string
      */
-    protected $table = "pages";
+    protected $table = 'pages';
 
     /**
      * Fillable columns
@@ -95,7 +95,7 @@ class Pages extends Model
      */
     public static function getUrlPrefix()
     {
-        return "/blog/page/";
+        return '/blog/page/';
     }
 
     /**
@@ -105,7 +105,7 @@ class Pages extends Model
      */
     public function getCategotyPageUrl()
     {
-        return "/blog/category/{{slug}}";
+        return '/blog/category/{{slug}}';
     }
 
     /**
@@ -176,10 +176,10 @@ class Pages extends Model
     public function hasPage($id)
     {
         $model = $this->findById($id);
-        if (is_object($model) == false) {
+        if (\is_object($model) == false) {
             $model = $this->findByColumn($id,'name');
         }
 
-        return is_object($model);
+        return \is_object($model);
     }
 }

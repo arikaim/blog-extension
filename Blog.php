@@ -39,10 +39,10 @@ class Blog extends Extension
         $this->addApiRoute('DELETE','/api/blog/admin/trash/empty','PageControlPanel','emptyTrash','session');  
 
         // Blog pages
-        $this->addHomePageRoute('/[{page:\d+}]','Blog','showBlog','blog>blog-page');
-        $this->addPageRoute('/blog/page/{slug}[/{page:\d+}]','Blog','showBlog','blog>blog-page');
-        $this->addPageRoute('/blog/category/{slug}[/{page:\d+}]','Blog','showCategory','blog>blog-category');      
-        $this->addPageRoute('/post/{slug}/{postSlug}','Blog','showBlogPost','blog>blog-post');
+        $this->addHomePageRoute('/[{page:\d+}]','Blog','showBlog','blog>blog-page',null,'blogHomePage',false);
+        $this->addPageRoute('/blog/page/{slug}[/{page:\d+}]','Blog','showBlog','blog>blog-page',null,'blogPage',false);
+        $this->addPageRoute('/blog/category/{slug}[/{page:\d+}]','Blog','showCategory','blog>blog-category',null,'blogCategoryPage',false);      
+        $this->addPageRoute('/post/{slug}/{postSlug}','Blog','showBlogPost','blog>blog-post','blogPostPage',false);
         
         // Relation map 
         $this->addRelationMap('post','Posts');

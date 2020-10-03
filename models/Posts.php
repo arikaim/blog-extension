@@ -44,7 +44,7 @@ class Posts extends Model
      *
      * @var string
      */
-    protected $table = "posts";
+    protected $table = 'posts';
 
     /**
      * Fillable attributes
@@ -113,7 +113,7 @@ class Posts extends Model
      */
     public static function getUrlPrefix()
     {
-        return "/post/";
+        return '/post/';
     }
 
     /**
@@ -128,7 +128,7 @@ class Posts extends Model
             ->where('title','=',$title)
             ->where('page_id','=',$pageId)->first();
 
-        return is_object($model);
+        return \is_object($model);
     }
 
     /**
@@ -164,7 +164,7 @@ class Posts extends Model
         $model = $this->getPublishedPosts($pageId);
         $model = $model->where('slug','=',$slug)->first();
 
-        return (is_object($model) == true) ? $model : false;
+        return (\is_object($model) == true) ? $model : false;
     }
 
     /**
@@ -179,7 +179,7 @@ class Posts extends Model
     {
         $model = ($id == null) ? $this : $this->findById($id);
         $page = $model->page()->first();        
-        $url = Self::getUrlPrefix() . $page->slug . "/" . $model->slug;
+        $url = Self::getUrlPrefix() . $page->slug . '/' . $model->slug;
     
         return Page::getUrl($url,$full,$withLanguagePath);
     }
