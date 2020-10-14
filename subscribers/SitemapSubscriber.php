@@ -66,7 +66,7 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
             return $model->getActive()->where('branch','=','blog')->get();           
         });
         foreach ($category as $item) {
-            $slug = $item->translation()->slug;
+            $slug = $item->translation('en')->slug;
             $url = Route::getRouteUrl($route['pattern'],['slug' => $slug]);
             $pages[] = $url;
         }     
