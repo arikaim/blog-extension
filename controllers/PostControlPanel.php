@@ -34,8 +34,10 @@ class PostControlPanel extends ControlPanelApiController
 
     /**
      * Constructor
+     * 
+     * @param Container|null $container
      */
-    public function __construct($container) 
+    public function __construct($container = null) 
     {
         parent::__construct($container);
         $this->setModelClass('Posts');
