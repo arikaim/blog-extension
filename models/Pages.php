@@ -179,6 +179,9 @@ class Pages extends Model
         if (\is_object($model) == false) {
             $model = $this->findByColumn($id,'name');
         }
+        if (\is_object($model) == false) {
+            $model = $this->findBySlug($id);
+        }
 
         return \is_object($model);
     }

@@ -10,13 +10,13 @@
 namespace Arikaim\Extensions\Blog\Controllers;
 
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Controllers\ApiController;
+use Arikaim\Core\Controllers\ControlPanelApiController;
 use Arikaim\Core\Controllers\Traits\Status;
 
 /**
  * Blog pages control panel controler
 */
-class PageControlPanel extends ApiController
+class PageControlPanel extends ControlPanelApiController
 {
     use Status;
 
@@ -49,13 +49,15 @@ class PageControlPanel extends ApiController
      * @return Psr\Http\Message\ResponseInterface
     */
     public function addController($request, $response, $data) 
-    {       
-        $this->requireControlPanelPermission();
-        
+    {         
         $this->onDataValid(function($data) {
             $pageName = $data->get('name');
             $page = Model::Pages('blog');
 
+            if ($page->hasPage($pageName) == true) {
+                $this->error('errors.page.exist');
+                return false;
+            }
             $result = $page->create([
                 'name' => $pageName
             ]);
@@ -81,8 +83,6 @@ class PageControlPanel extends ApiController
     */
     public function updateController($request, $response, $data) 
     {    
-        $this->requireControlPanelPermission();
-
         $this->onDataValid(function($data) {
             $pageName = $data->get('name');
             $uuid = $data->get('uuid');
@@ -91,9 +91,8 @@ class PageControlPanel extends ApiController
             $result = $page->update([
                 'name' => $pageName
             ]);
-            $result = ($result !== false);
-
-            $this->setResponse($result,function() use($page) {                                                       
+         
+            $this->setResponse(($result !== false),function() use($page) {                                                       
                 $this
                     ->message('page.update')
                     ->field('uuid',$page->uuid)
@@ -115,14 +114,12 @@ class PageControlPanel extends ApiController
     */
     public function softDelete($request, $response, $data)
     { 
-        $this->requireControlPanelPermission();
-
         $this->onDataValid(function($data) {                  
             $uuid = $data->get('uuid');
             $page = Model::Pages('blog')->findById($uuid);
             
             $result = false;
-            if (is_object($page) == true) {
+            if (\is_object($page) == true) {
                 $page->softDeletePosts();
                 $result = $page->softDelete();
             } 
@@ -150,8 +147,6 @@ class PageControlPanel extends ApiController
     */
     public function restore($request, $response, $data)
     { 
-        $this->requireControlPanelPermission();
-
         $this->onDataValid(function($data) {                  
             $uuid = $data->get('uuid');
             $page = Model::Pages('blog')->findById($uuid);
@@ -185,8 +180,6 @@ class PageControlPanel extends ApiController
     */
     public function emptyTrash($request, $response, $data)
     { 
-        $this->requireControlPanelPermission();
-
         $this->onDataValid(function($data) {                  
             $page = Model::Pages('blog');
             $post = Model::Posts('blog');

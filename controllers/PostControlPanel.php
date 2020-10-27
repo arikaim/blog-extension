@@ -10,14 +10,14 @@
 namespace Arikaim\Extensions\Blog\Controllers;
 
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Controllers\ApiController;
+use Arikaim\Core\Controllers\ControlPanelApiController;
 use Arikaim\Core\Controllers\Traits\Status;
 use Arikaim\Core\Controllers\Traits\SoftDelete;
 
 /**
  * Blog post control panel controler
 */
-class PostControlPanel extends ApiController
+class PostControlPanel extends ControlPanelApiController
 {
     use Status,
         SoftDelete;
@@ -51,9 +51,7 @@ class PostControlPanel extends ApiController
      * @return Psr\Http\Message\ResponseInterface
     */
     public function addController($request, $response, $data) 
-    {       
-        $this->requireControlPanelPermission();
-        
+    {         
         $this->onDataValid(function($data) {
             $title = $data->get('title');
             $page = Model::Pages('blog')->findById($data['page']);
@@ -90,8 +88,6 @@ class PostControlPanel extends ApiController
     */
     public function updateController($request, $response, $data) 
     {    
-        $this->requireControlPanelPermission();
-
         $this->onDataValid(function($data) {
             $title = $data->get('title');                    
             $post = Model::Posts('blog')->findById($data['uuid']);

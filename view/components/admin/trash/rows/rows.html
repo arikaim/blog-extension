@@ -3,6 +3,11 @@
 {% set posts = createModel('Posts','blog') %}  
 {% set posts = posts.softDeletedQuery().get() %}
 
+{% if items|length == 0 %}
+    <tr>
+        <td>..</td>
+    </tr>
+{% endif %}
 {% for page in items %}
     <tr id="row_{{ page.uuid }}">
         <td>

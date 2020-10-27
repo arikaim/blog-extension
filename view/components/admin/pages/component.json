@@ -1,4 +1,7 @@
 {
+    "include": {
+        "js": "blog::admin.posts"
+    },
     "access": {
         "auth": "session",
         "redirect": "/admin",

@@ -20,6 +20,7 @@
             "delete": "Can't delete post."
         },
         "page": {
+            "exist": "Page with this name exist.",
             "update": "Can't save page.",
             "add": "Can't create page.",
             "restore": "Can't restore page.",
