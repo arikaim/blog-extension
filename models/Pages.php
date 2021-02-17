@@ -11,7 +11,6 @@ namespace Arikaim\Extensions\Blog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Arikaim\Core\View\Html\Page;
 use Arikaim\Extensions\Blog\Models\Posts;
 
 use Arikaim\Core\Db\Traits\Uuid;
@@ -71,7 +70,7 @@ class Pages extends Model
     /**
      * Posts relation
      *
-     * @return mixed
+     * @return Relation|null
      */  
     public function posts()
     {
@@ -99,16 +98,6 @@ class Pages extends Model
     }
 
     /**
-     * Get category page url
-     *
-     * @return string
-     */
-    public function getCategotyPageUrl()
-    {
-        return '/blog/category/{{slug}}';
-    }
-
-    /**
      * Mutator (get) for url attribute.
      *
      * @return string
@@ -121,16 +110,16 @@ class Pages extends Model
     /**
      * Get page url
      *
-     * @param string|integer|null $id
+     * @param string|integer|null $name
      * @param boolean $full
      * @param boolean $withLanguagePath
      * @return string
      */
-    public function getUrl($id = null, $full = true, $withLanguagePath = false)
+    public function getUrl($name = null)
     {
-        $model = ($id == null) ? $this : $this->findById($id);
+        $model = (empty($name) == true) ? $this : $this->findPage($name);
        
-        return Page::getUrl(Self::getUrlPrefix() . $model->slug,$full,$withLanguagePath);
+        return Self::getUrlPrefix() . $model->slug;
     }
 
     /**
@@ -138,7 +127,7 @@ class Pages extends Model
      *
      * @return boolean
      */
-    public function softDeletePosts()
+    public function softDeletePosts(): bool
     {
         $errors = 0;
         $posts = $this->posts()->get();
@@ -155,7 +144,7 @@ class Pages extends Model
      *
      * @return boolean
      */
-    public function restorePosts()
+    public function restorePosts(): bool
     {
         $errors = 0;
         $posts = $this->posts()->get();
@@ -170,19 +159,36 @@ class Pages extends Model
     /**
      * Return true if page exist
      *
-     * @param string|integer $id Model Id, Uuid or Title
+     * @param string $id Model Id, uuid or name
      * @return boolean
      */
-    public function hasPage($id)
+    public function hasPage($id, ?string $exclude = null): bool
     {
-        $model = $this->findById($id);
-        if (\is_object($model) == false) {
-            $model = $this->findByColumn($id,'name');
-        }
-        if (\is_object($model) == false) {
-            $model = $this->findBySlug($id);
-        }
+        $model = $this->findPage($id,$exclude);
 
         return \is_object($model);
     }
+
+    /**
+     * Find page
+     *
+     * @param string|integer $name Model Id, Uuid or name
+     * @param string|null $exclude
+     * @return Model|false
+     */
+    public function findPage($name, ?string $exclude = null)
+    {
+        $model = $this->findById($name);
+        if (\is_object($model) == false) {
+            $model = $this->findByColumn($name,'name');
+        }
+        if (\is_object($model) == false) {
+            $model = $this->findBySlug($name);
+        }
+        if (\is_object($model) == false) {
+            return false;
+        }
+
+        return (empty($exclude) == false && $model->uuid == $exclude) ? false : $model;       
+    } 
 }

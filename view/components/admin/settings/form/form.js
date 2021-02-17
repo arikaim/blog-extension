@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     arikaim.ui.form.addRules("#blog_settings",{});
 
     arikaim.ui.form.onSubmit("#blog_settings",function() {  

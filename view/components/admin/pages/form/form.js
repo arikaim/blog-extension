@@ -1,7 +1,6 @@
 'use strict';
 
-$(document).ready(function() {   
-    // init form
+arikaim.component.onLoaded(function() {
     arikaim.ui.form.addRules("#page_form",{
         inline: false,
         fields: {

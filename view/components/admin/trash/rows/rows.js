@@ -1,6 +1,6 @@
 'use strict';
 
-arikaim.page.onReady(function() {  
+arikaim.component.onLoaded(function() {
     safeCall('trashView',function(obj) {
         obj.initRows();
     },true);  

@@ -88,7 +88,18 @@ class PageControlPanel extends ControlPanelApiController
         $this->onDataValid(function($data) {
             $pageName = $data->get('name');
             $uuid = $data->get('uuid');
-            $page = Model::Pages('blog')->findById($uuid);
+            $model = Model::Pages('blog')->findById($uuid);
+
+            if ($model->hasPage($pageName,$uuid) == true) {
+                $this->error('errors.page.exist');
+                return false;
+            }
+
+            $page = $model->findById($uuid);
+            if (\is_object($page) == false) {
+                $this->error('errors.page.id');
+                return false;
+            }
 
             $result = $page->update([
                 'name' => $pageName

@@ -6,11 +6,11 @@
                 <div class="content">
                     {{ page.name }}
                     <div class="sub header">
-                        <button class="ui tertiary blue button edit-page-name" page-id="{{ page.id }}">
+                        <button class="ui tertiary blue button edit-page-name" uuid="{{ page.uuid }}">
                             <i class="icon edit blue"></i>
                             {{ labels.edit }}
                         </button>
-                        <a class="ui icon tertiary button" href="{{ page.url }}" target="blog">
+                        <a class="ui icon tertiary button" href="{{ url(page.url) }}" target="blog">
                             <i class="external alternate blue icon"></i>
                         </a>
                         {{ page.url }}                                       

@@ -7,8 +7,7 @@
 'use strict';
 
 function BlogControlPanel() {
-    var self = this;
-
+  
     this.addPage = function(data, onSuccess, onError) {
         return arikaim.post('/api/blog/admin/page/add',data,onSuccess,onError);          
     };
@@ -78,6 +77,6 @@ function BlogControlPanel() {
 
 var blogControlPanel = new BlogControlPanel();
 
-arikaim.page.onReady(function() {
+arikaim.component.onLoaded(function() {
     blogControlPanel.init();
 });

@@ -10,6 +10,8 @@ function PostsControlPanel() {
     var self = this;
 
     this.init = function() {     
+        this.loadMessages('blog::admin');
+
         arikaim.ui.button('.view-posts',function(element) {
             var pageId = $(element).attr('page-id');
 
@@ -31,12 +33,12 @@ function PostsControlPanel() {
         });
 
         arikaim.ui.button('.edit-page-name',function(element) {
-            var pageId = $(element).attr('page-id');
+            var uuid = $(element).attr('uuid');
 
             return arikaim.page.loadContent({
                 id: 'post_content',           
                 component: 'blog::admin.pages.edit',
-                params: { page: pageId }
+                params: { uuid: uuid }
             });  
         });
     };
@@ -53,9 +55,6 @@ function PostsControlPanel() {
     };
 
     this.initRows = function() {
-        var component = arikaim.component.get('blog::admin');
-        var removeMessage = component.getProperty('messages.remove.content');
-
         arikaim.ui.button('.edit-post',function(element) {
             var uuid = $(element).attr('uuid');
             var pageId = $(element).attr('page-id');
@@ -67,9 +66,9 @@ function PostsControlPanel() {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
 
-            var message = arikaim.ui.template.render(removeMessage,{ title: title });
+            var message = arikaim.ui.template.render(self.getMessage('remove.content'),{ title: title });
             modal.confirmDelete({ 
-                title: component.getProperty('messages.remove.title'),
+                title: self.getMessage('remove.title'),
                 description: message
             },function() {
                 blogControlPanel.deletePost(uuid,function(result) {
@@ -89,9 +88,9 @@ function PostsControlPanel() {
     }
 }
 
-var posts = new PostsControlPanel();
+var posts = new createObject(PostsControlPanel,ControlPanelView);
 
-arikaim.page.onReady(function() {
+arikaim.component.onLoaded(function() {
     posts.init();
     posts.initRows();
 });

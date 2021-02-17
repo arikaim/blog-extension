@@ -1,7 +1,7 @@
 'use strict';
 
-$(document).ready(function() {
-    safeCall('pages',function(obj) {
+arikaim.component.onLoaded(function() {
+    safeCall('pagesView',function(obj) {
         obj.initRows();
     },true);   
 });

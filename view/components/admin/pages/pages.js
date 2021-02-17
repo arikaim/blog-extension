@@ -6,10 +6,12 @@
  */
 'use strict';
 
-function PagesControlPanel() {
+function PagesView() {
     var self = this;
 
     this.init = function() {     
+        this.loadMessages('blog::admin');
+
         arikaim.ui.button('.add-page',function(element) {
             return arikaim.page.loadContent({
                 id: 'page_editor',           
@@ -29,9 +31,6 @@ function PagesControlPanel() {
     };
 
     this.initRows = function() {
-        var component = arikaim.component.get('blog::admin');
-        var removeMessage = component.getProperty('messages.page.content');
-
         arikaim.ui.button('.edit-page',function(element) {
             var uuid = $(element).attr('uuid');
 
@@ -47,17 +46,17 @@ function PagesControlPanel() {
         arikaim.ui.button('.delete-page',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
-
-            var message = arikaim.ui.template.render(removeMessage,{ title: title });
+            var message = arikaim.ui.template.render(self.getMessage('page.content'),{ title: title });
+            
             modal.confirmDelete({ 
-                title: component.getProperty('messages.page.title'),
+                title: self.getMessage('page.title'),
                 description: message
             },function() {
                 blogControlPanel.deletePage(uuid,function(result) {
                     $('#' + uuid).remove();  
                     var editUuid = $('#page_editor').attr('edit-page');           
                     if (editUuid == uuid) {
-                        $('#page_editor').html("");
+                        $('#page_editor').html('');
                     }                 
                 });
             });
@@ -65,9 +64,9 @@ function PagesControlPanel() {
     };
 }
 
-var pages = new PagesControlPanel();
+var pagesView = new createObject(PagesView,ControlPanelView);
 
-arikaim.page.onReady(function() {
-    pages.init();
-    pages.initRows();
+arikaim.component.onLoaded(function() {
+    pagesView.init();
+    pagesView.initRows();
 });

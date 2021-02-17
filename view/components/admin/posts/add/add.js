@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     $('#post_status').dropdown({});
 
     arikaim.ui.form.onSubmit("#editor_form",function() {  

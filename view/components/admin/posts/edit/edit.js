@@ -1,7 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
-
+arikaim.component.onLoaded(function() {
     $('#post_status').dropdown({
         onChange: function(value) {           
             var uuid = $(this).attr('uuid');         

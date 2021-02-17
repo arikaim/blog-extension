@@ -11,7 +11,6 @@ namespace Arikaim\Extensions\Blog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Arikaim\Core\View\Html\Page;
 use Arikaim\Extensions\Blog\Models\Pages;
 
 use Arikaim\Core\Db\Traits\Uuid;
@@ -119,16 +118,18 @@ class Posts extends Model
     /**
      * Return true if post exist
      *
-     * @param string $integer Title
+     * @param string|int $title
+     * @param int|null
      * @return boolean
      */
-    public function hasPost($title, $pageId = null)
+    public function hasPost($title, ?int $pageId = null): bool
     {
-        $model = $this
-            ->where('title','=',$title)
-            ->where('page_id','=',$pageId)->first();
-
-        return \is_object($model);
+        $model = $this->where('title','=',$title);
+        if (empty($pageId) == false) {
+            $model = $model->where('page_id','=',$pageId);
+        }
+      
+        return \is_object($model->first());
     }
 
     /**
@@ -137,7 +138,7 @@ class Posts extends Model
      * @param integer $pageId
      * @return Builder
      */
-    public function getPublishedPosts($pageId)
+    public function getPublishedPosts(int $pageId)
     {
         return $this->where('page_id','=',$pageId)->where('status','=',1);
     }
@@ -157,9 +158,9 @@ class Posts extends Model
      *
      * @param integer $pageId
      * @param string $slug
-     * @return Model
+     * @return Model|false
      */
-    public function getPost($pageId, $slug)
+    public function getPost(int $pageId, string $slug)
     {
         $model = $this->getPublishedPosts($pageId);
         $model = $model->where('slug','=',$slug)->first();
@@ -171,16 +172,13 @@ class Posts extends Model
      * Get post url
      *
      * @param string|integer|null $id
-     * @param boolean $full
-     * @param boolean $withLanguagePath
      * @return string
      */
-    public function getUrl($id = null, $full = true, $withLanguagePath = false)
+    public function getUrl($id = null)
     {
         $model = ($id == null) ? $this : $this->findById($id);
-        $page = $model->page()->first();        
-        $url = Self::getUrlPrefix() . $page->slug . '/' . $model->slug;
-    
-        return Page::getUrl($url,$full,$withLanguagePath);
+        $page = $model->page()->first();    
+
+        return Self::getUrlPrefix() . $page->slug . '/' . $model->slug;       
     }
 }
