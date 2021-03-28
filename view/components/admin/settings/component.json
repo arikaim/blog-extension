@@ -1,6 +1,8 @@
 {
     "include": {
-        "js": "system:options"
+        "js": [
+            "system:options"
+        ]
     },
     "access": {
         "auth": "session",

@@ -88,7 +88,7 @@ function PostsControlPanel() {
     }
 }
 
-var posts = new createObject(PostsControlPanel,ControlPanelView);
+var posts = createObject(PostsControlPanel,ControlPanelView);
 
 arikaim.component.onLoaded(function() {
     posts.init();

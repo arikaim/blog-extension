@@ -1,6 +1,8 @@
 {
     "include": {
-        "js": "blog::admin.posts"
+        "js": [
+            "blog::admin.posts"
+        ]
     },
     "access": {
         "auth": "session",

@@ -77,7 +77,7 @@ function TrashControlPanel() {
     };
 }
 
-var trashView = new createObject(TrashControlPanel,ControlPanelView);
+var trashView = createObject(TrashControlPanel,ControlPanelView);
 
 arikaim.component.onLoaded(function() {
     trashView.init();

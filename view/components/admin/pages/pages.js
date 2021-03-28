@@ -64,7 +64,7 @@ function PagesView() {
     };
 }
 
-var pagesView = new createObject(PagesView,ControlPanelView);
+var pagesView = createObject(PagesView,ControlPanelView);
 
 arikaim.component.onLoaded(function() {
     pagesView.init();
