@@ -9,15 +9,15 @@
 function BlogControlPanel() {
   
     this.addPage = function(data, onSuccess, onError) {
-        return arikaim.post('/api/blog/admin/page/add',data,onSuccess,onError);          
+        return arikaim.post('/api/admin/blog/page/add',data,onSuccess,onError);          
     };
 
     this.deletePage = function(uuid, onSuccess, onError) {
-        return arikaim.delete('/api/blog/admin/page/delete/' + uuid,onSuccess,onError);          
+        return arikaim.delete('/api/admin/blog/page/delete/' + uuid,onSuccess,onError);          
     };
 
     this.updatePage = function(data, onSuccess, onError) {
-        return arikaim.put('/api/blog/admin/page/update',data, onSuccess, onError);          
+        return arikaim.put('/api/admin/blog/page/update',data, onSuccess, onError);          
     };
 
     this.setPageStatus = function(uuid, status, onSuccess, onError) {
@@ -26,15 +26,15 @@ function BlogControlPanel() {
             status: status
         };
         
-        return arikaim.put('/api/blog/admin/page/status',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/blog/page/status',data,onSuccess,onError);          
     };
     
     this.addPost = function(data, onSuccess, onError) {
-        return arikaim.post('/api/blog/admin/post/add',data,onSuccess,onError);          
+        return arikaim.post('/api/admin/blog/post/add',data,onSuccess,onError);          
     };
 
     this.deletePost = function(uuid, onSuccess, onError) {
-        return arikaim.delete('/api/blog/admin/post/delete/' + uuid,onSuccess,onError);          
+        return arikaim.delete('/api/admin/blog/post/delete/' + uuid,onSuccess,onError);          
     };
 
     this.setPostStatus = function(uuid, status, onSuccess, onError) {
@@ -43,11 +43,11 @@ function BlogControlPanel() {
             status: status
         };
         
-        return arikaim.put('/api/blog/admin/post/status',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/blog/post/status',data,onSuccess,onError);          
     };
 
     this.updatePost = function(data, onSuccess, onError) {
-        return arikaim.put('/api/blog/admin/post/update',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/blog/post/update',data,onSuccess,onError);          
     };
 
     this.restorePost = function(uuid, onSuccess, onError) {
@@ -55,7 +55,7 @@ function BlogControlPanel() {
             uuid: uuid
         };
 
-        return arikaim.put('/api/blog/admin/post/restore',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/blog/post/restore',data,onSuccess,onError);          
     };
 
     this.restorePage = function(uuid, onSuccess, onError) {
@@ -63,20 +63,16 @@ function BlogControlPanel() {
             uuid: uuid
         };
         
-        return arikaim.put('/api/blog/admin/page/restore',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/blog/page/restore',data,onSuccess,onError);          
     };
 
     this.emptyTrash = function(onSuccess, onError) {
-        return arikaim.delete('/api/blog/admin/trash/empty',onSuccess,onError);          
-    };
-
-    this.init = function() {     
-        arikaim.ui.tab();      
-    };
+        return arikaim.delete('/api/admin/blog/trash/empty',onSuccess,onError);          
+    };  
 }
 
 var blogControlPanel = new BlogControlPanel();
 
 arikaim.component.onLoaded(function() {
-    blogControlPanel.init();
+    arikaim.ui.tab();      
 });
