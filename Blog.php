@@ -10,6 +10,7 @@
 namespace Arikaim\Extensions\Blog;
 
 use Arikaim\Core\Extension\Extension;
+use Arikaim\Core\Db\Model;
 
 /**
  * Blog extension
@@ -47,7 +48,7 @@ class Blog extends Extension
         $this->createDbTable('PagesSchema');
         $this->createDbTable('PostsSchema');
         // Options
-        $this->createOption('blog.posts.perpage',7);
+        $this->createOption('blog.posts.perpage',7);       
     }   
 
     /**

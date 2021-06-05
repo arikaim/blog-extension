@@ -26,7 +26,7 @@ use Arikaim\Extensions\Category\Models\Traits\CategoryRelations;
 /**
  * Posts model class
  */
-class Posts extends Model  
+class Posts extends Model
 {
     use Uuid,     
         Find,   
@@ -35,7 +35,7 @@ class Posts extends Model
         DateCreated,
         DateUpdated,
         SoftDelete,
-        CategoryRelations,
+        CategoryRelations,     
         UserRelation;
     
     /**
@@ -94,6 +94,34 @@ class Posts extends Model
      * @var boolean
      */
     public $timestamps = false; 
+
+    /**
+     * Content provider name
+     *
+     * @var string
+     */
+    protected $contentProviderName = 'blog.post';
+
+    /**
+     * Content provider title
+     *
+     * @var string
+     */
+    protected $contentProviderTitle = 'Blog Posts';
+
+    /**
+     * Content provider category
+     *
+     * @var string|null
+     */
+    protected $contentProviderCategory = null;
+
+    /**
+     * Supported content types
+     *
+     * @var array
+     */
+    protected $supportedContentTypes = ['blog.post'];
 
     /**
      * Page relation
