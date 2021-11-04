@@ -44,6 +44,7 @@ class PostsSchema extends Schema
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
+        $table->metaTags();
         // index
         $table->unique(['title','page_id']);
         $table->unique(['slug','page_id']);
@@ -56,6 +57,9 @@ class PostsSchema extends Schema
      * @return void
      */
     public function update($table) 
-    {              
+    {
+        if ($this->hasColumn('meta_title') == false) {
+            $table->metaTags();
+        }              
     }
 }

@@ -135,5 +135,18 @@ class Blog extends Controller
         }
 
         $data['uuid'] = $post->uuid;   
+        $metaTitle = empty($post->meta_title) ? $post->title : $post->meta_title;
+
+        $this->get('page')->head()            
+            ->param('title',$metaTitle)
+            ->param('description',$post->meta_description) 
+            ->param('keywords',$post->meta_keywords)      
+            ->applyTwitterProperty('title',$metaTitle)   
+            ->applyTwitterProperty('description',$post->meta_description)   
+            ->applyOgProperty('title',$metaTitle)   
+            ->applyOgProperty('description',$post->meta_description)                
+            ->ogUrl($this->getUrl($request))         
+            ->ogType('website') 
+            ->twitterSite($this->getUrl($request));                 
     } 
 }

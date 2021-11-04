@@ -41,6 +41,7 @@ class PagesSchema extends Schema
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
+        $table->metaTags();
         // index
         $table->unique('name');
     }
@@ -52,6 +53,9 @@ class PagesSchema extends Schema
      * @return void
      */
     public function update($table) 
-    {              
+    {  
+        if ($this->hasColumn('meta_title') == false) {
+            $table->metaTags();
+        }             
     }
 }

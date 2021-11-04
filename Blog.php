@@ -10,7 +10,6 @@
 namespace Arikaim\Extensions\Blog;
 
 use Arikaim\Core\Extension\Extension;
-use Arikaim\Core\Db\Model;
 
 /**
  * Blog extension
@@ -29,14 +28,15 @@ class Blog extends Extension
         $this->addApiRoute('PUT','/api/admin/blog/page/update','PageControlPanel','update','session');   
         $this->addApiRoute('PUT','/api/admin/blog/page/status','PageControlPanel','setStatus','session');   
         $this->addApiRoute('DELETE','/api/admin/blog/page/delete/{uuid}','PageControlPanel','softDelete','session');  
-        $this->addApiRoute('PUT','/api/admin/blog/page/restore','PageControlPanel','restore','session');  
+        $this->addApiRoute('PUT','/api/admin/blog/page/restore','PageControlPanel','restore','session'); 
+        $this->addApiRoute('DELETE','/api/admin/blog/trash/empty','PageControlPanel','emptyTrash','session'); 
         // Control Panel Posts
         $this->addApiRoute('POST','/api/admin/blog/post/add','PostControlPanel','add','session');   
         $this->addApiRoute('PUT','/api/admin/blog/post/update','PostControlPanel','update','session');   
         $this->addApiRoute('PUT','/api/admin/blog/post/status','PostControlPanel','setStatus','session');   
         $this->addApiRoute('DELETE','/api/admin/blog/post/delete/{uuid}','PostControlPanel','softDelete','session');  
         $this->addApiRoute('PUT','/api/admin/blog/post/restore','PostControlPanel','restore','session');  
-        $this->addApiRoute('DELETE','/api/admin/blog/trash/empty','PageControlPanel','emptyTrash','session');  
+        $this->addApiRoute('PUT','/api/admin/blog/post/update/meta','PostControlPanel','updateMetaTags','session');  
         // Blog pages
         $this->addHomePageRoute('/[{page:\d+}]','Blog','showBlog','blog>blog-page',null,'blogHomePage',false);
         $this->addPageRoute('/blog/page/{slug}[/{page:\d+}]','Blog','showBlog','blog>blog-page',null,'blogPage',false);

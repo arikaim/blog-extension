@@ -60,6 +60,9 @@ class Posts extends Model
         'date_created',
         'date_updated',
         'date_deleted',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
         'user_id'
     ];
     
@@ -76,6 +79,9 @@ class Posts extends Model
         'date_updated',
         'key',
         'categories',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
         'content'              
     ];
 

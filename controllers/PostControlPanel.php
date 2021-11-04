@@ -45,6 +45,43 @@ class PostControlPanel extends ControlPanelApiController
     }
 
     /**
+     * Update meta tags
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function updateMetaTagsController($request, $response, $data) 
+    {
+        $this->onDataValid(function($data) { 
+            $uuid = $data->get('uuid');   
+            $metaTitle = $data->get('meta_title');
+            $metaDescription = $data->get('meta_description');   
+            $metaKeywords = $data->get('meta_keywords');  
+
+            $model = Model::Posts('blog')->findById($uuid);             
+            if (\is_object($model) == false) {
+                $this->error('errors.id');
+                return;
+            }
+        
+            $result = $model->update([
+                'meta_title'       => $metaTitle,
+                'meta_description' => $metaDescription,
+                'meta_keywords'    => $metaKeywords
+            ]);
+           
+            $this->setResponse(($result !== false),function() use($model) {               
+                $this
+                    ->message('post.metatags')
+                    ->field('uuid',$model->uuid);   
+            },'errors.post.metatags');
+        });
+        $data->validate(); 
+    }
+
+    /**
      * Add post
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
@@ -91,22 +128,25 @@ class PostControlPanel extends ControlPanelApiController
     public function updateController($request, $response, $data) 
     {    
         $this->onDataValid(function($data) {
-            $title = $data->get('title');                    
-            $post = Model::Posts('blog')->findById($data['uuid']);
-
-            $info = [               
+            $title = $data->get('title');   
+            $uuid =  $data->get('uuid');
+            $post = Model::Posts('blog')->findById($uuid);
+            if (\is_object($post) == false) {
+                $this->error('errors.post.id');
+                return false;
+            }
+            
+            if ($post->hasPost($title,$post->page_id) == true && $title != $post->title) {
+                $this->error('errors.post.exist');
+                return false;
+            }
+          
+            $result = $post->update([               
                 'content'   => $data['content'],
                 'title'     => $title            
-            ];
-            
-            if ($post->hasPost($title,$post->page_id) == true) {
-                $result = $post->update($info);               
-                $result = ($result !== false);
-            } else {
-                $result = false;
-            }
+            ]);          
 
-            $this->setResponse($result,function() use($post) {                                                       
+            $this->setResponse(($result !== false),function() use($post) {                                                       
                 $this
                     ->message('post.update')
                     ->field('uuid',$post->uuid)

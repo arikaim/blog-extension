@@ -1,3 +1,16 @@
-<div class="mt-2">
-    {{ component('blog::admin.posts.form',{ uuid: uuid }) }}
+{% set post = createModel('Posts','blog').findById(uuid) %}
+{% set title = title ~ ' ' ~ post.title %}
+{{ component('semantic~segment-title',{ title: title, icon: 'edit blue' }) }}
+<div class="ui stackable tabular menu product-edit-tabs">      
+    <div class="item link active blog-post-tab-item" component="blog::admin.posts.edit.content" uuid="{{ uuid }}">
+        <i class="icon stream blue"></i>
+        {{ labels.content }}     
+    </div>     
+    <div class="item link blog-post-tab-item" component="blog::admin.posts.edit.meta" uuid="{{ uuid }}">
+        <i class="code icon blue"></i>
+        {{ labels.meta }}     
+    </div>      
 </div>
+<div class="ui active tab basic segment" id="blog_post_edit_content">    
+    {{ component('blog::admin.posts.edit.content',{ uuid: uuid }) }}
+</div> 

@@ -49,7 +49,7 @@
             {% if uuid is not empty %}
                 <label>View</label>         
                 <div title="{{ post.url }}">
-                    <a class="ui icon tertiary button" href="{{ post.url }}" target="blog">
+                    <a class="ui icon tertiary button" href="{{ url(post.url) }}" target="blog">
                         <i class="external alternate blue icon"></i>
                     </a>                     
                 </div>  

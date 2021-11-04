@@ -1,3 +1,6 @@
 <div class="mt-8">
-    {{ component('blog::admin.posts.form',{ page: page }) }}
+    {{ component('semantic~segment-title',{ title: title, icon: 'plus blue' }) }}
+    <div class="mt-4">
+        {{ component('blog::admin.posts.form',{ page: page }) }}
+    </div>  
 </div>

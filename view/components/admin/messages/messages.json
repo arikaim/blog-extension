@@ -4,6 +4,7 @@
         "update": "Saved.",
         "add": "Post was created successfully.",
         "delete": "Post was deleted successfully.",
+        "metatags": "Post meta tags was saved successfully.",
         "restore": "Post was restored successfully."
     },
     "page": {
@@ -14,8 +15,11 @@
     },
     "errors": {
         "post": {
+            "id": "Not vlaid post Id",
+            "exist": "Post with this title exist.",
             "update": "Can't save post.",
             "add": "Can't create post.",
+            "metatags": "Can't save post metatags.",
             "restore": "Can't restore post.",
             "delete": "Can't delete post."
         },

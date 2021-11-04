@@ -1,5 +1,7 @@
 {
     "labels": {
-        "new": "New"
+        "new": "New",
+        "edit": "Edit",
+        "delete": "Delete"
     }
 }
