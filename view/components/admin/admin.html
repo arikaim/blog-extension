@@ -4,7 +4,7 @@
     { id: 'trash_button', title: labels.trash, component: 'blog::admin.trash', icon: 'trash' }     
 ] %}
 
-{{  component('components:tabs',{ 
+{{  component('semantic~tabs',{ 
         items: items,
         menu: { component: 'system:admin.extensions.menu.actions', extension: 'blog' },
         content: { component: 'blog::admin.pages' } 

@@ -8,10 +8,10 @@
         <label>{{ labels.name }}</label>
         <input name="name" id="name" value="{{ page.name }}" placeholder="{{ placeholder.name }}">
     </div>
-    {{  component('components:form.fields.slug',{ 
+    {{  component('semantic~form.fields.slug',{ 
             slug_source: 'name',
             url_path: page.getUrlPrefix()  
         }) 
     }}        
-    {{ component('components:form.footer') }}    
+    {{ component('semantic~form.footer') }}    
 </form>
