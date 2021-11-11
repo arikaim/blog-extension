@@ -38,6 +38,10 @@ class Blog extends Controller
             return $model->findBySlug($data['slug']);  
         });
     
+        if (\is_object($categoryTranslation) == false) {
+            return $this->pageNotFound($response,$data->toArray());
+        }
+
         $posts = Model::Posts('blog')->getActive();
         $posts = Model::Category('category',function($model) use($slug,$posts) {                
             return $model->relationsQuery($posts,$slug);           
@@ -78,15 +82,16 @@ class Blog extends Controller
         if (empty($slug) == false) {
             $page = $pages->findBySlug($slug);    
             if (\is_object($page) == false) {
-                return false;
+                // page not found
+                return $this->pageNotFound($response,$data->toArray());
             } 
             if ($page->status != $page->ACTIVE()) {
                 // page not published
-                return false;
+                return $this->pageNotFound($response,$data->toArray());
             }
             if ($page->isDeleted() == true) {
                 // page is deleted
-                return false;
+                return $this->pageNotFound($response,$data->toArray());
             }
         }
        
@@ -116,22 +121,22 @@ class Blog extends Controller
 
         $page = $pages->findBySlug($slug);      
         if (\is_object($page) == false) {          
-            return false;
+            return $this->pageNotFound($response,$data->toArray());
         } 
 
         $post = $posts->getPost($page->id,$postSlug);
         if (\is_object($post) == false) {
-            return false;
+            return $this->pageNotFound($response,$data->toArray());
         } 
 
         if ($post->status != $post->ACTIVE()) {
             // post not published
-            return false;
+            return $this->pageNotFound($response,$data->toArray());
         }
 
         if ($post->isDeleted() == true) {
             // post is deleted
-            return false;
+            return $this->pageNotFound($response,$data->toArray());
         }
 
         $data['uuid'] = $post->uuid;   
