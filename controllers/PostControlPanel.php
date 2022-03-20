@@ -114,7 +114,7 @@ class PostControlPanel extends ControlPanelApiController
         });
         $data
             ->addRule('text:min=2','title')
-            ->validate();        
+            ->validate();  
     }
 
     /**
@@ -126,7 +126,7 @@ class PostControlPanel extends ControlPanelApiController
      * @return Psr\Http\Message\ResponseInterface
     */
     public function updateController($request, $response, $data) 
-    {    
+    {   
         $this->onDataValid(function($data) {
             $title = $data->get('title');   
             $uuid =  $data->get('uuid');
