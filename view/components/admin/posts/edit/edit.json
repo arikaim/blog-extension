@@ -2,6 +2,7 @@
     "title": "Edit",
     "labels": {
         "content": "Content",
-        "meta": "Meta tags"
+        "meta": "Meta tags",
+        "image": "Image"
     }
 }

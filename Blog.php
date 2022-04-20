@@ -41,7 +41,7 @@ class Blog extends Extension
         $this->addHomePageRoute('/[{page:\d+}]','Blog','showBlog','blog>blog-page',null,'blogHomePage',false);
         $this->addPageRoute('/blog/page/{slug}[/{page:\d+}]','Blog','showBlog','blog>blog-page',null,'blogPage',false);
         $this->addPageRoute('/blog/category/{slug}[/{page:\d+}]','Blog','showCategory','blog>blog-category',null,'blogCategoryPage',false);      
-        $this->addPageRoute('/post/{slug}/{postSlug}','Blog','showBlogPost','blog>blog-post','blogPostPage',false);
+        $this->addPageRoute('/post/{slug}/{postSlug}','Blog','showBlogPost','blog>blog-post',null,'blogPostPage',false);
         // Relation map 
         $this->addRelationMap('post','Posts');
         // Create db tables

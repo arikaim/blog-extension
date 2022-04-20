@@ -1,6 +1,6 @@
-<div class="ui stackable divided grid min-h-full">
-    <div class="three wide column">
-        <div class="pb-1">
+<div class="ui stackable grid">
+    <div class="four wide column mt-2">
+        <div class="ui segment mt-4">
             <div class="ui small header">          
                 <i class="bordered icon file outline blue alternate"></i>
                 <div class="content">
@@ -14,12 +14,11 @@
                 </div>           
             </div>
         </div>       
-        <div class="ui divider"></div>
-        <div class="mt-4" id="pages_list">           
+        <div class="ui segment mt-4" id="pages_list">           
             {{ component('blog::admin.pages.list') }}
         </div>
     </div>
-    <div class="thirteen wide column pt-0" id="page_editor" style="padding-top:0px" edit-page="">           
+    <div class="twelve wide column" id="page_editor" edit-page="">           
         {{ component('blog::admin.pages.editor') }}                 
     </div>
 </div>

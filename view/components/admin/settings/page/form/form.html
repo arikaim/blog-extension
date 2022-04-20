@@ -1,6 +1,6 @@
 {% set posts_per_page = getOption('blog.posts.perpage') %}
 <form class="ui form" id="blog_settings">   
-    <div class="field two wide">
+    <div class="field five wide">
         <label>{{ labels.perpage }}</label>
         <input rule="integer" id="blog_posts_perpage" name="blog.posts.perpage" type="text" value="{{ posts_per_page }}">
     </div>

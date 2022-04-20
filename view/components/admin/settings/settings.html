@@ -1,5 +1,10 @@
-{% component 'semantic~tabs.vertical.content' %}  
-<div class="mt-4">
-    {{ component('blog::admin.settings.form') }}
-</div>
-{% endcomponent %}
+{{  component('semantic~tabs.vertical',{ 
+    items: [ 
+        { title: labels.page, component: 'blog::admin.settings.page', icon: 'file new outline', active: true },
+        { title: labels.nlp, component: 'blog::admin.settings.nlp', icon: 'robot' }
+    ], 
+        menu: { id: 'settings_menu' }, 
+        item_class: 'settings-item',
+        content: { id: 'settings_content', component: 'blog::admin.settings.page' } 
+    })
+}}

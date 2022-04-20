@@ -5,12 +5,16 @@
     <div class="item link active blog-post-tab-item" component="blog::admin.posts.edit.content" uuid="{{ uuid }}">
         <i class="icon stream blue"></i>
         {{ labels.content }}     
-    </div>     
+    </div>   
+    <div class="item link blog-post-tab-item" component="blog::admin.posts.edit.image" uuid="{{ uuid }}">
+        <i class="image icon blue"></i>
+        {{ labels.image }}     
+    </div>    
     <div class="item link blog-post-tab-item" component="blog::admin.posts.edit.meta" uuid="{{ uuid }}">
         <i class="code icon blue"></i>
         {{ labels.meta }}     
-    </div>      
+    </div> 
 </div>
-<div class="ui active tab basic segment" id="blog_post_edit_content">    
+<div class="ui active tab" id="blog_post_edit_content">    
     {{ component('blog::admin.posts.edit.content',{ uuid: uuid }) }}
 </div> 

@@ -1,16 +1,15 @@
 {% set page = createModel('Pages','blog').findById(page) %}
 {% set posts = createModel('Posts','blog').getNotDeletedQuery().where('page_id','=',page.id) %}
 {% set items = paginate(posts,'posts') %}
-
 <div class="ui divided big relaxed list mt-4">
     {% for item in items.getItems() %}
     <div class="item" id="{{ item.uuid }}">
         <div class="left floated content">
-            {{ component('blog::admin.status',{ status: item.status }) }}
-            <div class="ui basic icon mini button edit-post" uuid="{{ item.uuid }}" page-id="{{ page.id }}" title="{{ labels.edit }}">
+            {{ component('blog::admin.status',{ status: item.status, class: 'small' }) }}
+            <div class="ui basic icon mini compact button edit-post" uuid="{{ item.uuid }}" page-id="{{ page.id }}" title="{{ labels.edit }}">
                 <i class="icon edit"></i>
             </div>
-            <div class="ui basic icon mini button delete-post" uuid="{{ item.uuid }}" data-title="{{ item.title }}" title="{{ labels.delete }}">
+            <div class="ui basic icon mini compact button delete-post" uuid="{{ item.uuid }}" data-title="{{ item.title }}" title="{{ labels.delete }}">
                 <i class="icon trash orange"></i>            
             </div>
         </div>
