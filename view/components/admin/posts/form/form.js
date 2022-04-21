@@ -1,17 +1,16 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
-    arikaim.ui.form.addRules("#editor_form",{
-        inline: false,
-        fields: {
-            title: {
-                identifier: "title",      
-                rules: [{
-                    type: "minLength[2]"       
-                }]
-            }
-        }
-    });   
-
+    arikaim.ui.form.addRules("#editor_form",{});   
     var editor = posts.createEditor();
+
+    arikaim.ui.button('.nlp-button',function(element) {
+        $('#nlp_content').toggle(500);
+        
+        return arikaim.page.loadContent({
+            id: 'nlp_content',           
+            component: 'blog::admin.nlp',
+            params: {}
+        });  
+    });
 });

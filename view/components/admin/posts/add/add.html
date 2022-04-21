@@ -1,6 +1,14 @@
 <div class="mt-8">
     {{ component('semantic~segment-title',{ title: title, icon: 'plus blue' }) }}
     <div class="mt-4">
-        {{ component('blog::admin.posts.form',{ page: page }) }}
+        <div class="flex flex-row items-starft">
+            <div class="flex-grow">
+                <div class="ui segment">
+                    {{ component('blog::admin.posts.form',{ page: page }) }}
+                </div> 
+            </div>
+            <div class="pl-2 w-96 hidden" id="nlp_content">
+            </div>       
+        </div>        
     </div>  
 </div>

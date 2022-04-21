@@ -1,9 +1,8 @@
 {% set page = createModel('Pages','blog').findById(page) %}
 {% set posts = page.posts().count() %}
-<div class="ui segment">
-    {% if posts == 0 or posts is empty %}
-        {{ component('blog::admin.posts.add',{ page: page.uuid }) }}
-    {% else %}
-        {{ component('blog::admin.posts.list',{ page: page.uuid }) }}
-    {% endif %}
-</div>
+
+{% if posts == 0 or posts is empty %}
+    {{ component('blog::admin.posts.add',{ page: page.uuid }) }}
+{% else %}
+    {{ component('blog::admin.posts.list',{ page: page.uuid }) }}
+{% endif %}

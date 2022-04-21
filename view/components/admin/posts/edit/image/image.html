@@ -1,3 +1,28 @@
-<div>
-    
+{% set post = createModel('Posts','blog').findById(uuid) %}
+<div class="ui grid">
+    <div class="seven wide column">
+        <div class="ui segment" id="blog_post" uuid="{{ uuid }}">
+            <div class="flex flex-row items-start">
+                {% if post.image.src is not empty %}
+                <div>              
+                    <img class="ui image small bordered rounded" src="{{ url(post.image.src) }}">
+                </div>
+                {% endif %}
+                {% if hasExtension('image') == true %}
+                <div class="pl-4 flex-grow">
+                    {{  component('image::upload.form',{ 
+                            class: 'border border-solid rounded border-gray-300 p-2',
+                            button_class: 'upload-button mini',              
+                            hide_path: true,               
+                            hide_labels: true,
+                            private_image: false,                                     
+                            resize_width: 512,                           
+                            resize_height: 512
+                        }) 
+                    }}      
+                {% endif %}
+                </div>                  
+            </div>
+        </div>
+    </div>
 </div>

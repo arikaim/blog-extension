@@ -141,10 +141,10 @@ class PostControlPanel extends ControlPanelApiController
                 return false;
             }
           
-            $result = $post->update([               
-                'content'   => $data['content'],
-                'title'     => $title            
-            ]);          
+            $result = $post->update($data->toArray());              
+          //      'content'   => $data['content'],
+         //       'title'     => $title            
+         //   ]);          
 
             $this->setResponse(($result !== false),function() use($post) {                                                       
                 $this

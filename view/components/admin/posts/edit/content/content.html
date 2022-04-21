@@ -1,3 +1,9 @@
-<div class="ui segment">
-    {{ component('blog::admin.posts.form',{ uuid: uuid }) }}
+<div class="flex flex-row items-starft">
+    <div class="flex-grow">
+        <div class="ui segment">
+            {{ component('blog::admin.posts.form',{ uuid: uuid }) }}
+        </div>
+    </div>
+    <div class="w-96 hidden pl-2" id="nlp_content">
+    </div>       
 </div>

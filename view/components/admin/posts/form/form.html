@@ -5,12 +5,28 @@
     <input type="hidden" value="{{ page }}" name="page">
     <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">
     <div class="fields">
+        <div class="field">
+            <a class="ui mini icon compact blue button nlp-button right aligned" title="{{ labels.nlp }}">
+                <i class="icon robot"></i>
+            </a>
+        </div> 
+        <div class="two wide feild">
+            {% if uuid is not empty %}                   
+                <div title="{{ post.url }}">
+                    <a class="ui icon mini compact blue button" href="{{ url(post.url) }}" target="blog" title="{{ labels.view }}">
+                        <i class="external alternate icon"></i>
+                    </a>                     
+                </div>  
+            {% endif %}         
+        </div>    
+    </div>
+    <div class="fields">
         <div class="six wide field">
             <label>{{ labels.title }}</label>
-            <input name="title" type="text" placeholder="{{ placeholders.title }}" value="{{ post.title }}">
+            <input rule="minLength[2]" name="title" type="text" placeholder="{{ placeholders.title }}" value="{{ post.title }}">
         </div>
         {% if uuid is not empty %}
-        <div class="four wide field">
+        <div class="five wide field">
             <label>{{ labels.category }}</label>
             {% set category = createModel('Category','category').getList(null,'blog') %}
             {{  component('system:admin.orm.relations.fields.dropdown',{ 
@@ -24,7 +40,7 @@
             }}   
         </div>
         {% endif %}
-        <div class="two wide field">
+        <div class="three wide field">
             <label>{{ labels.status }}</label>
             {{ component('blog::admin.status.dropdown',{ id: 'post_status', selected: post.status, uuid: uuid, class: 'p-2' }) }}   
         </div>
@@ -33,29 +49,19 @@
                 <label>{{ labels.date }}</label>
                 <div class="ui list">
                     {% if post.date_created is not null %}
-                    <div class="item">
-                        <span class="ui pr-2 text grey">{{ labels.created }}</span>{{ post.date_created|dateFormat }}
+                    <div class="item" title="{{ labels.created }}">
+                        <span class="font-bold">{{ post.date_created|dateFormat }}</span>
                     </div>
                     {% endif %}                
                     {% if post.date_updated is not null %}
-                    <div class="item">
-                        <span class="ui pr-2 text grey">{{ labels.updated }}</span>{{ post.date_updated|dateFormat }}
+                    <div class="item" title="{{ labels.updated }}">
+                        <span class="font-bold">{{ post.date_updated|dateFormat }}</span>
                     </div>
                     {% endif %}
                 </div>
             {% endif %}
-        </div>
-        <div class="feild">
-            {% if uuid is not empty %}
-                <label>View</label>         
-                <div title="{{ post.url }}">
-                    <a class="ui icon tertiary button" href="{{ url(post.url) }}" target="blog">
-                        <i class="external alternate blue icon"></i>
-                    </a>                     
-                </div>  
-            {% endif %}         
-        </div>
+        </div>   
     </div>
-    <textarea name="content" id="editor">{{ post.content }}</textarea>    
+    <textarea name="content" id="editor">{{ post.content }}</textarea>       
     {{ component('semantic~form.footer') }}    
 </form>

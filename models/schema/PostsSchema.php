@@ -41,6 +41,7 @@ class PostsSchema extends Schema
         $table->longText('content')->nullable(true);      
         $table->string('title')->nullable(true);
         $table->relation('page_id','pages');
+        $table->integer('image_id')->nullable(true);     
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
@@ -60,6 +61,9 @@ class PostsSchema extends Schema
     {
         if ($this->hasColumn('meta_title') == false) {
             $table->metaTags();
+        }  
+        if ($this->hasColumn('image_id') == false) {
+            $table->integer('image_id')->nullable(true);     
         }              
     }
 }

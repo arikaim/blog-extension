@@ -57,6 +57,7 @@ class Posts extends Model
         'title',
         'page_id',
         'content',
+        'image_id',
         'date_created',
         'date_updated',
         'date_deleted',
@@ -77,7 +78,7 @@ class Posts extends Model
         'slug',
         'title',  
         'date_updated',
-        'key',
+        'key',        
         'categories',
         'meta_title',
         'meta_description',
@@ -128,6 +129,16 @@ class Posts extends Model
      * @var array
      */
     protected $supportedContentTypes = ['blog.post'];
+
+    /**
+     * Image relation
+     *
+     * @return Relation|null
+     */
+    public function image()
+    {
+        return $this->belongsTo('Arikaim\\Extensions\\Image\\Models\\Image','image_id');
+    }
 
     /**
      * Page relation
