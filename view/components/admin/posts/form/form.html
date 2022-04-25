@@ -1,6 +1,7 @@
 {% if uuid is not empty %}
     {% set post = createModel('Posts','blog').findById(uuid) %}
 {% endif %}
+
 <form class="ui form" id="editor_form">
     <input type="hidden" value="{{ page }}" name="page">
     <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">

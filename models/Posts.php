@@ -57,6 +57,7 @@ class Posts extends Model
         'title',
         'page_id',
         'content',
+        'summary',
         'image_id',
         'date_created',
         'date_updated',
@@ -83,6 +84,7 @@ class Posts extends Model
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'summary',
         'content'              
     ];
 

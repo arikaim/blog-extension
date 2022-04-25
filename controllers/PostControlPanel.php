@@ -140,12 +140,9 @@ class PostControlPanel extends ControlPanelApiController
                 $this->error('errors.post.exist');
                 return false;
             }
-          
+        
             $result = $post->update($data->toArray());              
-          //      'content'   => $data['content'],
-         //       'title'     => $title            
-         //   ]);          
-
+       
             $this->setResponse(($result !== false),function() use($post) {                                                       
                 $this
                     ->message('post.update')

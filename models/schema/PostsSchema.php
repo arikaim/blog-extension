@@ -39,6 +39,7 @@ class PostsSchema extends Schema
         $table->userId();
         $table->slug(false);
         $table->longText('content')->nullable(true);      
+        $table->text('summary')->nullable(true);      
         $table->string('title')->nullable(true);
         $table->relation('page_id','pages');
         $table->integer('image_id')->nullable(true);     
@@ -64,6 +65,9 @@ class PostsSchema extends Schema
         }  
         if ($this->hasColumn('image_id') == false) {
             $table->integer('image_id')->nullable(true);     
+        }  
+        if ($this->hasColumn('summary') == false) {
+            $table->text('summary')->nullable(true);    
         }              
     }
 }
