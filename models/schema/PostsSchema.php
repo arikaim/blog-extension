@@ -41,6 +41,7 @@ class PostsSchema extends Schema
         $table->longText('content')->nullable(true);      
         $table->text('summary')->nullable(true);      
         $table->string('title')->nullable(true);
+        $table->string('content_type')->nullable(true);
         $table->relation('page_id','pages');
         $table->integer('image_id')->nullable(true);     
         $table->dateCreated();
@@ -68,6 +69,9 @@ class PostsSchema extends Schema
         }  
         if ($this->hasColumn('summary') == false) {
             $table->text('summary')->nullable(true);    
+        }  
+        if ($this->hasColumn('content_type') == false) {
+            $table->string('content_type')->nullable(true); 
         }              
     }
 }
