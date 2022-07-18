@@ -178,7 +178,7 @@ class Posts extends Model
             $model = $model->where('page_id','=',$pageId);
         }
       
-        return \is_object($model->first());
+        return ($model->first() != null);
     }
 
     /**
@@ -207,14 +207,12 @@ class Posts extends Model
      *
      * @param integer $pageId
      * @param string $slug
-     * @return Model|false
+     * @return Model|null
      */
     public function getPost(int $pageId, string $slug)
     {
         $model = $this->getPublishedPosts($pageId);
-        $model = $model->where('slug','=',$slug)->first();
-
-        return (\is_object($model) == true) ? $model : false;
+        return $model->where('slug','=',$slug)->first();      
     }
 
     /**

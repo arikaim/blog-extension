@@ -30,16 +30,6 @@ class PostControlPanel extends ControlPanelApiController
     public function init()
     {
         $this->loadMessages('blog::admin.messages');
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param Container|null $container
-     */
-    public function __construct($container = null) 
-    {
-        parent::__construct($container);
         $this->setModelClass('Posts');
         $this->setExtensionName('Blog');
     }
@@ -61,7 +51,7 @@ class PostControlPanel extends ControlPanelApiController
             $metaKeywords = $data->get('meta_keywords');  
 
             $model = Model::Posts('blog')->findById($uuid);             
-            if (\is_object($model) == false) {
+            if ($model == null) {
                 $this->error('errors.id');
                 return;
             }
@@ -131,7 +121,7 @@ class PostControlPanel extends ControlPanelApiController
             $title = $data->get('title');   
             $uuid =  $data->get('uuid');
             $post = Model::Posts('blog')->findById($uuid);
-            if (\is_object($post) == false) {
+            if ($post == null) {
                 $this->error('errors.post.id');
                 return false;
             }

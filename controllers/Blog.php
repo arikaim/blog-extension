@@ -38,7 +38,7 @@ class Blog extends Controller
             return $model->findBySlug($data['slug']);  
         });
     
-        if (\is_object($categoryTranslation) == false) {
+        if ($categoryTranslation == null) {
             return $this->pageNotFound($response,$data->toArray());
         }
 
@@ -81,7 +81,7 @@ class Blog extends Controller
         $page = null;
         if (empty($slug) == false) {
             $page = $pages->findBySlug($slug);    
-            if (\is_object($page) == false) {
+            if ($page == null) {
                 // page not found
                 return $this->pageNotFound($response,$data->toArray());
             } 
@@ -95,7 +95,7 @@ class Blog extends Controller
             }
         }
        
-        if (\is_object($page) == true) {
+        if ($page != null) {
             $posts = $posts->where('page_id','=',$page->id);          
             $data['page_title'] = $page->name;
             $data['page_url'] = $pageUrl . $slug;
@@ -120,12 +120,12 @@ class Blog extends Controller
         $posts = Model::Posts('blog');  
 
         $page = $pages->findBySlug($slug);      
-        if (\is_object($page) == false) {          
+        if ($page == null) {          
             return $this->pageNotFound($response,$data->toArray());
         } 
 
         $post = $posts->getPost($page->id,$postSlug);
-        if (\is_object($post) == false) {
+        if ($post == null) {
             return $this->pageNotFound($response,$data->toArray());
         } 
 

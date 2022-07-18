@@ -28,16 +28,6 @@ class PageControlPanel extends ControlPanelApiController
     public function init()
     {
         $this->loadMessages('blog::admin.messages');
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param Container|null $container
-     */
-    public function __construct($container = null) 
-    {
-        parent::__construct($container);
         $this->setModelClass('Pages');
         $this->setExtensionName('Blog');
     }
@@ -96,7 +86,7 @@ class PageControlPanel extends ControlPanelApiController
             }
 
             $page = $model->findById($uuid);
-            if (\is_object($page) == false) {
+            if ($page == null) {
                 $this->error('errors.page.id');
                 return false;
             }
@@ -132,7 +122,7 @@ class PageControlPanel extends ControlPanelApiController
             $page = Model::Pages('blog')->findById($uuid);
             
             $result = false;
-            if (\is_object($page) == true) {
+            if ($page != null) {
                 $page->softDeletePosts();
                 $result = $page->softDelete();
             } 
@@ -165,7 +155,7 @@ class PageControlPanel extends ControlPanelApiController
             $page = Model::Pages('blog')->findById($uuid);
             
             $result = false;
-            if (\is_object($page) == true) {
+            if ($page != null) {
                 $page->restorePosts();
                 $result = $page->restore();
             } 

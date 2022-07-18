@@ -166,7 +166,7 @@ class Pages extends Model
     {
         $model = $this->findPage($id,$exclude);
 
-        return \is_object($model);
+        return ($model !== false);
     }
 
     /**
@@ -179,13 +179,13 @@ class Pages extends Model
     public function findPage($name, ?string $exclude = null)
     {
         $model = $this->findById($name);
-        if (\is_object($model) == false) {
+        if ($model == null) {
             $model = $this->findByColumn($name,'name');
         }
-        if (\is_object($model) == false) {
+        if ($model == null) {
             $model = $this->findBySlug($name);
         }
-        if (\is_object($model) == false) {
+        if ($model == null) {
             return false;
         }
 
