@@ -42,27 +42,26 @@ class PageControlPanel extends ControlPanelApiController
     */
     public function addController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) {
-            $pageName = $data->get('name');
-            $page = Model::Pages('blog');
-
-            if ($page->hasPage($pageName) == true) {
-                $this->error('errors.page.exist');
-                return false;
-            }
-            $result = $page->create([
-                'name' => $pageName
-            ]);
-            $this->setResponse(\is_object($result),function() use($result) {                                                       
-                $this
-                    ->message('page.add')
-                    ->field('uuid',$result->page)
-                    ->field('slug',$result->slug);           
-            },'errors.page.add');
-        });
         $data
-            ->addRule('text:min=2','name')
-            ->validate();   
+            ->addRule('text:min=2|required','name')
+            ->validate(true); 
+
+        $pageName = $data->get('name');
+        $page = Model::Pages('blog');
+
+        if ($page->hasPage($pageName) == true) {
+            $this->error('errors.page.exist');
+            return false;
+        }
+        $result = $page->create([
+            'name' => $pageName
+        ]);
+        $this->setResponse(\is_object($result),function() use($result) {                                                       
+            $this
+                ->message('page.add')
+                ->field('uuid',$result->page)
+                ->field('slug',$result->slug);           
+        },'errors.page.add');    
     }
 
     /**
@@ -75,36 +74,35 @@ class PageControlPanel extends ControlPanelApiController
     */
     public function updateController($request, $response, $data) 
     {    
-        $this->onDataValid(function($data) {
-            $pageName = $data->get('name');
-            $uuid = $data->get('uuid');
-            $model = Model::Pages('blog')->findById($uuid);
-
-            if ($model->hasPage($pageName,$uuid) == true) {
-                $this->error('errors.page.exist');
-                return false;
-            }
-
-            $page = $model->findById($uuid);
-            if ($page == null) {
-                $this->error('errors.page.id');
-                return false;
-            }
-
-            $result = $page->update([
-                'name' => $pageName
-            ]);
-         
-            $this->setResponse(($result !== false),function() use($page) {                                                       
-                $this
-                    ->message('page.update')
-                    ->field('uuid',$page->uuid)
-                    ->field('slug',$page->slug);           
-            },'errors.page.update');
-        });
         $data
-            ->addRule('text:min=2','name')
-            ->validate();   
+            ->addRule('text:min=2|required','name')
+            ->validate(true); 
+
+        $pageName = $data->get('name');
+        $uuid = $data->get('uuid');
+        $model = Model::Pages('blog')->findById($uuid);
+
+        if ($model->hasPage($pageName,$uuid) == true) {
+            $this->error('errors.page.exist');
+            return false;
+        }
+
+        $page = $model->findById($uuid);
+        if ($page == null) {
+            $this->error('errors.page.id');
+            return false;
+        }
+
+        $result = $page->update([
+            'name' => $pageName
+        ]);
+        
+        $this->setResponse(($result !== false),function() use($page) {                                                       
+            $this
+                ->message('page.update')
+                ->field('uuid',$page->uuid)
+                ->field('slug',$page->slug);           
+        },'errors.page.update');
     }
 
     /**
@@ -115,29 +113,26 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function softDelete($request, $response, $data)
+    public function softDeleteController($request, $response, $data)
     { 
-        $this->onDataValid(function($data) {                  
-            $uuid = $data->get('uuid');
-            $page = Model::Pages('blog')->findById($uuid);
-            
-            $result = false;
-            if ($page != null) {
-                $page->softDeletePosts();
-                $result = $page->softDelete();
-            } 
-
-            $this->setResponse($result,function() use($uuid) {              
-                $this
-                    ->message('page.delete')
-                    ->field('uuid',$uuid);                  
-            },'errors.page.delete');
-        });
         $data
             ->addRule('text:min=2|required','uuid')           
-            ->validate(); 
+            ->validate(true); 
+            
+        $uuid = $data->get('uuid');
+        $page = Model::Pages('blog')->findById($uuid);
+        
+        $result = false;
+        if ($page != null) {
+            $page->softDeletePosts();
+            $result = $page->softDelete();
+        } 
 
-        return $this->getResponse();            
+        $this->setResponse($result,function() use($uuid) {              
+            $this
+                ->message('page.delete')
+                ->field('uuid',$uuid);                  
+        },'errors.page.delete');            
     }
 
     /**
@@ -148,29 +143,26 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function restore($request, $response, $data)
+    public function restoreController($request, $response, $data)
     { 
-        $this->onDataValid(function($data) {                  
-            $uuid = $data->get('uuid');
-            $page = Model::Pages('blog')->findById($uuid);
-            
-            $result = false;
-            if ($page != null) {
-                $page->restorePosts();
-                $result = $page->restore();
-            } 
-
-            $this->setResponse($result,function() use($uuid) {              
-                $this
-                    ->message('page.restore')
-                    ->field('uuid',$uuid);                  
-            },'errors.page.restore');
-        });
         $data
             ->addRule('text:min=2|required','uuid')           
-            ->validate(); 
+            ->validate(true); 
 
-        return $this->getResponse();            
+        $uuid = $data->get('uuid');
+        $page = Model::Pages('blog')->findById($uuid);
+        
+        $result = false;
+        if ($page != null) {
+            $page->restorePosts();
+            $result = $page->restore();
+        } 
+
+        $this->setResponse($result,function() use($uuid) {              
+            $this
+                ->message('page.restore')
+                ->field('uuid',$uuid);                  
+        },'errors.page.restore');     
     }
 
     /**
@@ -181,24 +173,19 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function emptyTrash($request, $response, $data)
+    public function emptyTrashController($request, $response, $data)
     { 
-        $this->onDataValid(function($data) {                  
-            $page = Model::Pages('blog');
-            $post = Model::Posts('blog');
+        $data->validate(true); 
 
-            $errors = 0;
-            $errors += ($page->clearDeleted() === false) ? 1 : 0;
-            $errors += ($post->clearDeleted() === false) ? 1 : 0;
-            $result = ($errors == 0);
+        $page = Model::Pages('blog');
+        $post = Model::Posts('blog');
 
-            $this->setResponse($result,function()  {              
-                $this
-                    ->message('trash.empty');                            
-            },'errors.trash.empty');
-        });
-        $data->validate(); 
+        $page->clearDeleted();
+        $post->clearDeleted();
 
-        return $this->getResponse();       
+        $this->setResponse(true,function()  {              
+            $this
+                ->message('trash.empty');                            
+        },'errors.trash.empty');
     }
 }
