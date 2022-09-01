@@ -4,7 +4,7 @@ arikaim.component.onLoaded(function() {
     arikaim.events.on('image.upload',function(result) {   
         var uuid = $('#blog_post').attr('uuid');
 
-        blogControlPanel.updatePost({
+        blogControlPanel.updatePostImage({
             image_id: result.id,
             uuid: uuid
         },function(result) {
