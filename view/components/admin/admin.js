@@ -50,6 +50,10 @@ function BlogControlPanel() {
         return arikaim.put('/api/admin/blog/post/update',data,onSuccess,onError);          
     };
 
+    this.updatePostImage = function(data, onSuccess, onError) {
+        return arikaim.put('/api/admin/blog/post/update/image',data,onSuccess,onError);          
+    };
+
     this.updatePostMetaTags = function(data, onSuccess, onError) {
         return arikaim.put('/api/admin/blog/post/update/meta',data,onSuccess,onError);          
     };

@@ -42,7 +42,7 @@ class PostControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function updateMetaTagsController($request, $response, $data) 
+    public function updateMetaTags($request, $response, $data) 
     {
         $data->validate(true); 
 
@@ -78,7 +78,7 @@ class PostControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function addController($request, $response, $data) 
+    public function add($request, $response, $data) 
     {         
         $data
             ->addRule('text:min=2|required','title')
@@ -113,7 +113,7 @@ class PostControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function updateController($request, $response, $data) 
+    public function update($request, $response, $data) 
     {   
         $data
             ->addRule('text:min=2|required','title')
@@ -133,6 +133,39 @@ class PostControlPanel extends ControlPanelApiController
         }
     
         $result = $post->update($data->toArray());              
+    
+        $this->setResponse(($result !== false),function() use($post) {                                                       
+            $this
+                ->message('post.update')
+                ->field('uuid',$post->uuid)
+                ->field('slug',$post->slug);           
+        },'errors.post.update');
+    }
+
+    /**
+     * Update image
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function updateImage($request, $response, $data) 
+    {   
+        $data           
+            ->validate(true);       
+            
+        $imageId = $data->get('image_id');   
+        $uuid =  $data->get('uuid');
+        $post = Model::Posts('blog')->findById($uuid);
+        if ($post == null) {
+            $this->error('errors.post.id');
+            return false;
+        }
+        
+        $result = $post->update([
+            'image_id' => $imageId
+        ]);              
     
         $this->setResponse(($result !== false),function() use($post) {                                                       
             $this

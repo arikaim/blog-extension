@@ -147,7 +147,7 @@ class Posts extends Model
     /**
      * Page relation
      *
-     * @return mixed
+     * @return Relation
      */  
     public function page()
     {
@@ -159,7 +159,7 @@ class Posts extends Model
      *
      * @return string
      */
-    public static function getUrlPrefix()
+    public static function getUrlPrefix(): string
     {
         return '/post/';
     }
@@ -209,7 +209,7 @@ class Posts extends Model
      * @param string $slug
      * @return Model|null
      */
-    public function getPost(int $pageId, string $slug)
+    public function getPost(int $pageId, string $slug): ?object
     {
         $model = $this->getPublishedPosts($pageId);
         return $model->where('slug','=',$slug)->first();      
@@ -221,7 +221,7 @@ class Posts extends Model
      * @param string|integer|null $id
      * @return string
      */
-    public function getUrl($id = null)
+    public function getUrl($id = null): string
     {
         $model = ($id == null) ? $this : $this->findById($id);
         $page = $model->page()->first();    

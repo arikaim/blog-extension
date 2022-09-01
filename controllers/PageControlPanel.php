@@ -40,7 +40,7 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function addController($request, $response, $data) 
+    public function add($request, $response, $data) 
     {         
         $data
             ->addRule('text:min=2|required','name')
@@ -72,7 +72,7 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function updateController($request, $response, $data) 
+    public function update($request, $response, $data) 
     {    
         $data
             ->addRule('text:min=2|required','name')
@@ -113,7 +113,7 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function softDeleteController($request, $response, $data)
+    public function softDelete($request, $response, $data)
     { 
         $data
             ->addRule('text:min=2|required','uuid')           
@@ -143,7 +143,7 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function restoreController($request, $response, $data)
+    public function restore($request, $response, $data)
     { 
         $data
             ->addRule('text:min=2|required','uuid')           
@@ -173,7 +173,7 @@ class PageControlPanel extends ControlPanelApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function emptyTrashController($request, $response, $data)
+    public function emptyTrash($request, $response, $data)
     { 
         $data->validate(true); 
 

@@ -92,7 +92,7 @@ class Pages extends Model
      *
      * @return string
      */
-    public static function getUrlPrefix()
+    public static function getUrlPrefix(): string
     {
         return '/blog/page/';
     }
@@ -115,7 +115,7 @@ class Pages extends Model
      * @param boolean $withLanguagePath
      * @return string
      */
-    public function getUrl($name = null)
+    public function getUrl($name = null): string
     {
         $model = (empty($name) == true) ? $this : $this->findPage($name);
        
