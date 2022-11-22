@@ -1,5 +1,5 @@
 {% set selected_text = (selected == 1) ? labels.published : labels.draft %}
-<div class="ui dropdown {{ class }} status-dropdown" uuid="{{ uuid }}" {{ id|attr('id') }}>
+<div class="ui dropdown {{ class }} status-dropdown field" uuid="{{ uuid }}" {{ id|attr('id') }}>
     <div class="text">
         {% if selected == 1 %}
             <i class="icon check olive"></i>

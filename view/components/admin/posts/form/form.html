@@ -3,7 +3,7 @@
 {% endif %}
 
 <form class="ui form" id="editor_form">
-    <input type="hidden" value="{{ page }}" name="page">
+    <input type="hidden" value="{{ page }}" name="page" id="page">
     <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">
     <div class="fields">
         <div class="field">
@@ -11,7 +11,7 @@
                 <i class="icon robot"></i>
             </a>
         </div> 
-        <div class="two wide feild">
+        <div class="field">
             {% if uuid is not empty %}                   
                 <div title="{{ post.url }}">
                     <a class="ui icon mini compact blue button" href="{{ url(post.url) }}" target="blog" title="{{ labels.view }}">
@@ -24,7 +24,13 @@
     <div class="fields">
         <div class="six wide field">
             <label>{{ labels.title }}</label>
-            <input rule="minLength[2]" name="title" type="text" placeholder="{{ placeholders.title }}" value="{{ post.title }}">
+            <input 
+                rule="minLength[2]" 
+                id="title"
+                name="title" 
+                type="text" 
+                placeholder="{{ placeholders.title }}" 
+                value="{{ post.title }}">
         </div>
         {% if uuid is not empty %}
         <div class="five wide field">
@@ -63,6 +69,8 @@
             {% endif %}
         </div>   
     </div>
-    <textarea name="content" id="editor">{{ post.content }}</textarea>       
+    <div class="field">
+        <textarea name="content" id="editor">{{ post.content }}</textarea>     
+    </div>
     {{ component('semantic~form.footer') }}    
 </form>

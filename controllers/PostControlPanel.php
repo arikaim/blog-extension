@@ -174,4 +174,37 @@ class PostControlPanel extends ControlPanelApiController
                 ->field('slug',$post->slug);           
         },'errors.post.update');
     }
+
+    /**
+     * Update summary
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function updateSummaryController($request, $response, $data) 
+    {   
+        $data           
+            ->validate(true);       
+
+        $uuid = $data->get('uuid');
+        $summary = $data->get('summary');   
+       
+        $post = Model::Posts('blog')->findById($uuid);
+        if ($post == null) {
+            $this->error('errors.post.id');
+            return false;
+        }
+        
+        $result = $post->update([
+            'summary' => $summary
+        ]);              
+    
+        $this->setResponse(($result !== false),function() use($post) {                                                       
+            $this
+                ->message('post.update')
+                ->field('uuid',$post->uuid);                    
+        },'errors.post.update');
+    }
 }

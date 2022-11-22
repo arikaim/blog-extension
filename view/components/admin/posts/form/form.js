@@ -1,8 +1,8 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
-    arikaim.ui.form.addRules("#editor_form",{});   
-    var editor = posts.createEditor();
+    arikaim.ui.form.addRules("#editor_form");   
+    posts.createEditor();
 
     arikaim.ui.button('.nlp-button',function(element) {
         $('#nlp_content').toggle(500);

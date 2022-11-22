@@ -46,6 +46,10 @@ function BlogControlPanel() {
         return arikaim.put('/api/admin/blog/post/status',data,onSuccess,onError);          
     };
 
+    this.updatePostSummary = function(data, onSuccess, onError) {
+        return arikaim.put('/api/admin/blog/post/update/summary',data,onSuccess,onError);          
+    };
+
     this.updatePost = function(data, onSuccess, onError) {
         return arikaim.put('/api/admin/blog/post/update',data,onSuccess,onError);          
     };
