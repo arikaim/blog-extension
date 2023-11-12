@@ -134,6 +134,10 @@ class PostControlPanel extends ControlPanelApiController
     
         $result = $post->update($data->toArray());              
     
+        $this->get('service')->with('apimetrics',function($service) use($request) {
+            $service->increment($request);
+        });
+
         $this->setResponse(($result !== false),function() use($post) {                                                       
             $this
                 ->message('post.update')
