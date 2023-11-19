@@ -1,4 +1,5 @@
-{% set post = createModel('Posts','blog').findById(uuid) %}
-{% set language = language|default(current_language) %}
-
-{{ component('semantic~form.meta',{ uuid: uuid, language: language, translation: post }) }}
+{{  component('semantic~form.meta',{ 
+        uuid: uuid, 
+        model: createModel('Posts','blog').findById(uuid)
+    }) 
+}}

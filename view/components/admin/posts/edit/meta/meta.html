@@ -1,9 +1,7 @@
 {% component 'semantic~tabs.vertical.content' %}
-    {% set language = language|default(current_language) %}
     <div>
-       
         <div class="mt-2" id="meta_content" blog-post-uuid="{{ uuid }}">                 
-            {{ component('blog::admin.posts.edit.meta.form',{ uuid: uuid, language: language }) }}
+            {{ component('blog::admin.posts.edit.meta.form',{ uuid: uuid }) }}
         </div>  
     </div>     
 {% endcomponent %}
