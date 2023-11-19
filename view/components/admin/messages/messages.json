@@ -1,5 +1,6 @@
 {
     "restore": "Item was restored successfully.",
+    "metatags": "Metatags saved successfully.",
     "post": {
         "update": "Saved.",
         "add": "Post was created successfully.",
@@ -14,6 +15,7 @@
         "restore": "Page was restored successfully."
     },
     "errors": {
+        "metatags": "Error save metatags",
         "post": {
             "id": "Not vlaid post Id",
             "exist": "Post with this title exist.",

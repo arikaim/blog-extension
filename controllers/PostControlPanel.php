@@ -13,6 +13,7 @@ use Arikaim\Core\Db\Model;
 use Arikaim\Core\Controllers\ControlPanelApiController;
 use Arikaim\Core\Controllers\Traits\Status;
 use Arikaim\Core\Controllers\Traits\SoftDelete;
+use Arikaim\Core\Controllers\Traits\MetaTags;
 
 /**
  * Blog post control panel controler
@@ -20,6 +21,7 @@ use Arikaim\Core\Controllers\Traits\SoftDelete;
 class PostControlPanel extends ControlPanelApiController
 {
     use Status,
+        MetaTags,
         SoftDelete;
 
     /**
@@ -32,42 +34,6 @@ class PostControlPanel extends ControlPanelApiController
         $this->loadMessages('blog::admin.messages');
         $this->setModelClass('Posts');
         $this->setExtensionName('Blog');
-    }
-
-    /**
-     * Update meta tags
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
-    */
-    public function updateMetaTags($request, $response, $data) 
-    {
-        $data->validate(true); 
-
-        $uuid = $data->get('uuid');   
-        $metaTitle = $data->get('meta_title');
-        $metaDescription = $data->get('meta_description');   
-        $metaKeywords = $data->get('meta_keywords');  
-
-        $model = Model::Posts('blog')->findById($uuid);             
-        if ($model == null) {
-            $this->error('errors.id');
-            return;
-        }
-    
-        $result = $model->update([
-            'meta_title'       => $metaTitle,
-            'meta_description' => $metaDescription,
-            'meta_keywords'    => $metaKeywords
-        ]);
-        
-        $this->setResponse(($result !== false),function() use($model) {               
-            $this
-                ->message('post.metatags')
-                ->field('uuid',$model->uuid);   
-        },'errors.post.metatags');
     }
 
     /**
