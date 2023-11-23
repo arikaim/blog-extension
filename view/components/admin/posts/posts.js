@@ -43,16 +43,7 @@ function PostsControlPanel() {
         });
     };
 
-    this.loadEditPost = function(uuid, pageId) {
-        return arikaim.page.loadContent({
-            id: 'post_content',           
-            component: 'blog::admin.posts.edit',
-            params: { 
-                uuid: uuid,
-                page_id: pageId 
-            }
-        });  
-    };
+   
 
     this.initRows = function() {
         arikaim.ui.button('.edit-post',function(element) {

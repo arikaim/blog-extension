@@ -8,12 +8,6 @@
         "metatags": "Post meta tags was saved successfully.",
         "restore": "Post was restored successfully."
     },
-    "page": {
-        "update": "Saved.",
-        "add": "Page was created successfully.",
-        "delete": "Page was deleted successfully.",
-        "restore": "Page was restored successfully."
-    },
     "errors": {
         "metatags": "Error save metatags",
         "post": {
@@ -24,13 +18,6 @@
             "metatags": "Can't save post metatags.",
             "restore": "Can't restore post.",
             "delete": "Can't delete post."
-        },
-        "page": {
-            "exist": "Page with this name exist.",
-            "update": "Can't save page.",
-            "add": "Can't create page.",
-            "restore": "Can't restore page.",
-            "delete": "Can't delete page."
-        }
+        }      
     }
 }

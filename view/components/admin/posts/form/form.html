@@ -5,24 +5,30 @@
 <form class="ui form" id="editor_form">
     <input type="hidden" value="{{ page }}" name="page" id="page">
     <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">
-    <div class="fields">
+    <div class="two fields">
         <div class="field">
-            <a class="ui mini icon compact blue button nlp-button right aligned" title="{{ labels.nlp }}">
-                <i class="icon robot"></i>
-            </a>
+            {% if uuid is not empty %}
+                <label>{{ labels.date }}</label>
+                <div class="ui list">
+                    {% if post.date_created is not null %}
+                    <div class="" title="{{ labels.created }}">
+                        <span class="font-bold">{{ post.date_created|dateFormat }}</span>
+                    </div>
+                    {% endif %}                
+                    {% if post.date_updated is not null %}
+                    <div class="" title="{{ labels.updated }}">
+                        <span class="font-bold">{{ post.date_updated|dateFormat }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div> 
         <div class="field">
-            {% if uuid is not empty %}                   
-                <div title="{{ post.url }}">
-                    <a class="ui icon mini compact blue button" href="{{ url(post.url) }}" target="blog" title="{{ labels.view }}">
-                        <i class="external alternate icon"></i>
-                    </a>                     
-                </div>  
-            {% endif %}         
+              
         </div>    
     </div>
-    <div class="fields">
-        <div class="six wide field">
+    <div class="two fields">
+        <div class="field">
             <label>{{ labels.title }}</label>
             <input 
                 rule="minLength[2]" 
@@ -33,7 +39,7 @@
                 value="{{ post.title }}">
         </div>
         {% if uuid is not empty %}
-        <div class="five wide field">
+        <div class="field">
             <label>{{ labels.category }}</label>
             {% set category = createModel('Category','category').getList(null,'blog') %}
             {{  component('system:admin.orm.relations.fields.dropdown',{ 
@@ -50,24 +56,7 @@
         <div class="three wide field">
             <label>{{ labels.status }}</label>
             {{ component('blog::admin.status.dropdown',{ id: 'post_status', selected: post.status, uuid: uuid, class: 'p-2' }) }}   
-        </div>
-        <div class="two wide field">
-            {% if uuid is not empty %}
-                <label>{{ labels.date }}</label>
-                <div class="ui list">
-                    {% if post.date_created is not null %}
-                    <div class="item" title="{{ labels.created }}">
-                        <span class="font-bold">{{ post.date_created|dateFormat }}</span>
-                    </div>
-                    {% endif %}                
-                    {% if post.date_updated is not null %}
-                    <div class="item" title="{{ labels.updated }}">
-                        <span class="font-bold">{{ post.date_updated|dateFormat }}</span>
-                    </div>
-                    {% endif %}
-                </div>
-            {% endif %}
-        </div>   
+        </div>        
     </div>
     <div class="field">
         <textarea name="content" id="editor">{{ post.content }}</textarea>     

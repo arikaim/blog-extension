@@ -1,4 +1,9 @@
 {
+    "include": {
+        "js":[
+            "blog::api"
+        ]
+    },
     "access": {
         "auth": "session",
         "redirect": "/admin",

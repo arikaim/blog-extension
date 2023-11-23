@@ -1,0 +1,52 @@
+{% if uuid is not empty %}
+    {% set currency = createModel('Posts','blog').findById(uuid) %}  
+{% endif %}
+{% component 'semantic~panel' %}
+<div>
+    <table class="ui very basic definition table">
+        <thead>
+            <tr>
+                <th class="three wide"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="right aligned">{{ labels.id }}</td>
+                <td>
+                    <div class="ui basic label">
+                        {{ currency.id }}
+                    </div>
+                    {{ currency.uuid }}
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.status }}</td>
+                <td>
+                    {{ component('semantic~status.label',{ status: currency.status }) }}                   
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.title }}</td>
+                <td>
+                    {{ currency.title }}
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.slug }}</td>
+                <td>
+                    {{ currency.slug }}
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">
+                    {{ labels.content }}
+                </td>
+                <td>                   
+                    {{ currency.content|md }}                  
+                </td>
+            </tr>             
+        </tbody>  
+    </table>     
+</div>
+{% endcomponent %}

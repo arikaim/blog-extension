@@ -1,5 +1,6 @@
 {
     "title": "Edit",
+    "icon": "edit",
     "labels": {
         "content": "Content",
         "summary": "Content Summary",

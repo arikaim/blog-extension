@@ -1,8 +1,9 @@
 <div class="flex flex-row items-starft">
     <div class="flex-grow">
-        <div class="ui segment">
-            {{ component('blog::admin.posts.form',{ uuid: uuid }) }}
-        </div>
+        <button class="ui mini icon circular blue button nlp-button" title="{{ labels.nlp }}">
+            <i class="icon robot"></i>
+        </button>
+        {{ component('blog::admin.posts.form',{ uuid: uuid }) }}
     </div>
     <div class="w-96 hidden pl-2" id="nlp_content">
     </div>       

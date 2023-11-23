@@ -1,7 +1,7 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
-    safeCall('pagesView',function(obj) {
+    safeCall('blogPostView',function(obj) {
         obj.initRows();
-    },true);   
+    },true);    
 });

@@ -41,16 +41,15 @@ class PostsSchema extends Schema
         $table->longText('content')->nullable(true);      
         $table->text('summary')->nullable(true);      
         $table->string('title')->nullable(true);
-        $table->string('content_type')->nullable(true);
-        $table->relation('page_id','pages');
+        $table->string('content_type')->nullable(true);    
         $table->integer('image_id')->nullable(true);     
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
         $table->metaTags();
         // index
-        $table->unique(['title','page_id']);
-        $table->unique(['slug','page_id']);
+        $table->unique(['title','user_id']);
+        $table->unique(['slug','user_id']);
     }
 
     /**
@@ -61,6 +60,16 @@ class PostsSchema extends Schema
      */
     public function update($table) 
     {
+        if ($this->hasIndex('posts_slug_page_id_unique') == true) {
+            $this->dropIndex('posts_slug_page_id_unique');
+        }
+        if ($this->hasIndex('posts_title_page_id_unique') == true) {
+            $this->dropIndex('posts_title_page_id_unique');
+        }
+        if ($this->hasColumn('page_id') == true) {
+            $table->dropForeign('posts_page_id_foreign');
+            $table->dropColumn('page_id');
+        }
         if ($this->hasColumn('meta_title') == false) {
             $table->metaTags();
         }  

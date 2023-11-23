@@ -23,33 +23,21 @@ class Blog extends Extension
     */
     public function install()
     {
-        // Control Panel Pages       
-        $this->addApiRoute('POST','/api/admin/blog/page/add','PageControlPanel','add','session');   
-        $this->addApiRoute('PUT','/api/admin/blog/page/update','PageControlPanel','update','session');   
-        $this->addApiRoute('PUT','/api/admin/blog/page/status','PageControlPanel','setStatus','session');   
-        $this->addApiRoute('DELETE','/api/admin/blog/page/delete/{uuid}','PageControlPanel','softDelete','session');  
-        $this->addApiRoute('PUT','/api/admin/blog/page/restore','PageControlPanel','restore','session'); 
-        $this->addApiRoute('DELETE','/api/admin/blog/trash/empty','PageControlPanel','emptyTrash','session'); 
-        // Control Panel Posts
-        $this->addApiRoute('POST','/api/admin/blog/post/add','PostControlPanel','add','session');   
-        $this->addApiRoute('PUT','/api/admin/blog/post/update','PostControlPanel','update','session');   
-        $this->addApiRoute('PUT','/api/admin/blog/post/status','PostControlPanel','setStatus','session');   
-        $this->addApiRoute('DELETE','/api/admin/blog/post/delete/{uuid}','PostControlPanel','softDelete','session');  
-        $this->addApiRoute('PUT','/api/admin/blog/post/restore','PostControlPanel','restore','session');  
-        $this->addApiRoute('PUT','/api/admin/blog/post/update/meta','PostControlPanel','updateMetaTags','session');  
-        $this->addApiRoute('PUT','/api/admin/blog/post/update/image','PostControlPanel','updateImage','session');  
-        $this->addApiRoute('PUT','/api/admin/blog/post/update/summary','PostControlPanel','updateSummary','session');  
+        // Api routes
+        $this->addApiRoute('POST','/api/blog/post/add','PostApi','add','session');   
+        $this->addApiRoute('PUT','/api/blog/post/update','PostApi','update','session');   
+        $this->addApiRoute('PUT','/api/blog/post/status','PostApi','setStatus','session');   
+        $this->addApiRoute('DELETE','/api/blog/post/delete/{uuid}','PostApi','softDelete','session');  
+        $this->addApiRoute('PUT','/api/blog/post/restore','PostApi','restore','session');  
+        $this->addApiRoute('PUT','/api/blog/post/update/meta','PostApi','updateMetaTags','session');  
+        $this->addApiRoute('PUT','/api/blog/post/update/image','PostApi','updateImage','session');  
+        $this->addApiRoute('PUT','/api/blog/post/update/summary','PostApi','updateSummary','session');  
         // Blog pages
-        $this->addPageRoute('/blog/page/{slug}[/{page:\d+}]','Blog','showBlog','blog>blog-page',null,'blogPage',false);
-        $this->addPageRoute('/blog/category/{slug}[/{page:\d+}]','Blog','showCategory','blog>blog-category',null,'blogCategoryPage',false);      
-        $this->addPageRoute('/post/{slug}/{postSlug}','Blog','showBlogPost','blog>blog-post',null,'blogPostPage',false);
+        $this->addPageRoute('/blog/post/{slug}','Blog','showBlogPost','blog>blog.post',null,'blogPostPage',false);
         // Relation map 
         $this->addRelationMap('post','Posts');
         // Create db tables
-        $this->createDbTable('PagesSchema');
-        $this->createDbTable('PostsSchema');
-        // Options
-        $this->createOption('blog.posts.perpage',7);       
+        $this->createDbTable('PostsSchema');     
     }   
 
     /**

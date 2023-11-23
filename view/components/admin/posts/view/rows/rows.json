@@ -1,0 +1,20 @@
+{    
+    "buttons": {
+        "delete": {      
+            "content": "Delete",          
+            "title": "Delte tag"
+        },
+        "relations": {
+            "content": "Relations",          
+            "title": "View Relations"
+        }
+    },
+    "labels": {
+        "details": "Details",
+        "rates": "Exchange Rates",
+        "primary": "Primary",
+        "set": "Set primary",
+        "crypto": "Crypto",
+        "private": "Private"
+    }  
+}

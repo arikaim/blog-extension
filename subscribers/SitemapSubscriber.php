@@ -37,10 +37,7 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
     public function execute($event)
     {     
         $params = $event->getParameters();
-
-        if ($params['page_name'] == 'blog>blog-page') {
-            return $this->getBlogPages($params);       
-        }           
+         
         if ($params['page_name'] == 'blog>blog-post') {
             return $this->getBlogPostPages($params);       
         }  
@@ -87,29 +84,10 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
         
         foreach ($posts as $item) {               
             $url = Route::getRouteUrl($route['pattern'],[
-                'slug'     => $item->page->slug,
+                'slug'     => $item->slug,
                 'postSlug' => $item->slug
             ]);
          
-            $pages[] = $url;
-        }      
-
-        return $pages;
-    }
-
-    /**
-     * Get blog pages
-     *
-     * @param array $route    
-     * @return array
-     */
-    public function getBlogPages($route)
-    {
-        $pages = [];
-        $model = Model::Pages('blog')->getActive()->get();     
-        
-        foreach ($model as $item) {     
-            $url = Route::getRouteUrl($route['pattern'],['slug' => $item->slug]);
             $pages[] = $url;
         }      
 

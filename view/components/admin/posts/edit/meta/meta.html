@@ -1,7 +1,5 @@
-{% component 'semantic~tabs.vertical.content' %}
-    <div>
-        <div class="mt-2" id="meta_content" blog-post-uuid="{{ uuid }}">                 
-            {{ component('blog::admin.posts.edit.meta.form',{ uuid: uuid }) }}
-        </div>  
-    </div>     
-{% endcomponent %}
+<div>
+    <div class="mt-2" id="meta_content" blog-post-uuid="{{ uuid }}">                 
+        {{ component('blog::admin.posts.edit.meta.form',{ uuid: uuid }) }}
+    </div>  
+</div>     
