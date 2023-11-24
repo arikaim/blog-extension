@@ -2,7 +2,7 @@
 
 arikaim.component.onLoaded(function() {
     arikaim.ui.form.addRules("#editor_form");   
-    posts.createEditor();
+    blogPostView.createEditor();
 
     arikaim.ui.button('.nlp-button',function(element) {
         $('#nlp_content').toggle(500);

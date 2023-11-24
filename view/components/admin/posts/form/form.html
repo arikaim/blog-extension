@@ -1,7 +1,6 @@
 {% if uuid is not empty %}
     {% set post = createModel('Posts','blog').findById(uuid) %}
 {% endif %}
-
 <form class="ui form" id="editor_form">
     <input type="hidden" value="{{ page }}" name="page" id="page">
     <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">
@@ -9,15 +8,21 @@
         <div class="field">
             {% if uuid is not empty %}
                 <label>{{ labels.date }}</label>
-                <div class="ui list">
+                <div class="flex flex-row items-center">
                     {% if post.date_created is not null %}
-                    <div class="" title="{{ labels.created }}">
-                        <span class="font-bold">{{ post.date_created|dateFormat }}</span>
+                    <div class="flex flex-row items-center px-4">
+                        <span class="px-2">{{ labels.created }}</span>
+                        <span class="ui basic horizontal label">
+                            {{ post.date_created|dateFormat }}
+                        </span>
                     </div>
                     {% endif %}                
                     {% if post.date_updated is not null %}
-                    <div class="" title="{{ labels.updated }}">
-                        <span class="font-bold">{{ post.date_updated|dateFormat }}</span>
+                    <div class="flex flex-row items-center px-4">
+                        <span class="px-2">{{ labels.updated }}</span>
+                        <span class="ui basic horizontal label">
+                            {{ post.date_updated|dateFormat }}
+                        </span>
                     </div>
                     {% endif %}
                 </div>

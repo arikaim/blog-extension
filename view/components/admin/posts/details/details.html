@@ -1,5 +1,5 @@
 {% if uuid is not empty %}
-    {% set currency = createModel('Posts','blog').findById(uuid) %}  
+    {% set post = createModel('Posts','blog').findById(uuid) %}  
 {% endif %}
 {% component 'semantic~panel' %}
 <div>
@@ -15,27 +15,27 @@
                 <td class="right aligned">{{ labels.id }}</td>
                 <td>
                     <div class="ui basic label">
-                        {{ currency.id }}
+                        {{ post.id }}
                     </div>
-                    {{ currency.uuid }}
+                    {{ post.uuid }}
                 </td>
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.status }}</td>
                 <td>
-                    {{ component('semantic~status.label',{ status: currency.status }) }}                   
+                    {{ component('semantic~status.label',{ status: post.status }) }}                   
                 </td>
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.title }}</td>
                 <td>
-                    {{ currency.title }}
+                    {{ post.title }}
                 </td>
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.slug }}</td>
                 <td>
-                    {{ currency.slug }}
+                    {{ post.slug }}
                 </td>
             </tr>
             <tr>
@@ -43,10 +43,19 @@
                     {{ labels.content }}
                 </td>
                 <td>                   
-                    {{ currency.content|md }}                  
+                    {{ post.content|md }}                  
                 </td>
-            </tr>             
+            </tr>   
+            <tr>
+                <td class="right aligned">
+                    {{ labels.summary }}
+                </td>
+                <td>                   
+                    {{ post.summary }}                  
+                </td>
+            </tr>                   
         </tbody>  
     </table>     
+    {{ component('semantic~view.metatags',{ model: post }) }}    
 </div>
 {% endcomponent %}

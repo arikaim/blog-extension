@@ -135,6 +135,16 @@ class Posts extends Model
     protected $supportedContentTypes = ['blog.post'];
 
     /**
+     * Delete post
+     *
+     * @return boolean
+     */
+    public function deletePost(): bool
+    {
+        return ($this->delete() !== false);
+    }
+
+    /**
      * Find posts
      *
      * @param Builder      $query
@@ -164,7 +174,7 @@ class Posts extends Model
      */
     public function hasPost(string $key, ?int $userId = null): bool
     {
-        return ($this->findPost($key,$userId)->first() != null);
+        return ($this->findPost($key,$userId) != null);
     }
 
     /**
@@ -181,11 +191,11 @@ class Posts extends Model
     /**
      * Find post
      *
-     * @param integer $pageId
-     * @param string $slug
+     * @param string $key
+     * @param int|null $userId
      * @return Model|null
      */
-    public function findPost(int $key, ?int $userId): ?object
+    public function findPost(string $key, ?int $userId): ?object
     {
         return $this->findPostQuery($key,$userId)->first();      
     }

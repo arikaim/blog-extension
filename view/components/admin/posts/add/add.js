@@ -5,7 +5,17 @@ arikaim.component.onLoaded(function() {
 
     arikaim.ui.form.onSubmit("#editor_form",function() {  
         return blogApi.addPost('#editor_form',function(result) {
-            return blogPostView.loadEditPost(result.uuid);
+            blogPostView.addItem({
+                uuid: result.uuid
+            });
+            
+            return arikaim.page.loadContent({
+                id: 'details_content',           
+                component: 'blog::admin.posts.edit',
+                params: { 
+                    uuid: result.uuid
+                }
+            });
         });
     },function(result) {          
         arikaim.ui.form.showMessage(result.message);        

@@ -9,7 +9,9 @@ arikaim.component.onLoaded(function() {
     });
 
     arikaim.ui.form.onSubmit("#editor_form",function() {  
-        return blogApi.updatePost('#editor_form');
+        return blogApi.updatePost('#editor_form',function(result) {
+            blogPostView.updateItem(result.uuid);
+        });
     },function(result) {          
         arikaim.ui.form.showMessage(result.message);        
     },function(error) {

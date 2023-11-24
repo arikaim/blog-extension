@@ -17,7 +17,7 @@ function TrashControlPanel() {
                 title: self.getMessage('empty.title'),
                 description: self.getMessage('empty.description') 
             },function() {         
-                blogControlPanel.emptyTrash(function(result) {
+                blogApi.emptyTrash(function(result) {
                     self.loadRows();
                 },function(error) {
                     arikaim.page.toastMessage({
@@ -40,29 +40,10 @@ function TrashControlPanel() {
     };
 
     this.initRows = function() {
-        arikaim.ui.button('.restore-page',function(element) {   
-            var uuid = $(element).attr('uuid');
-
-            blogControlPanel.restorePage(uuid,function(result) {
-                arikaim.ui.table.removeRow('#row_' + uuid,null,function(element) {
-                    $('.trash-button').addClass('disabled');
-                });
-                arikaim.ui.table.removeRow('.page-' + uuid,null,function(element) {
-                    $('.trash-button').addClass('disabled');
-                });
-                arikaim.page.toastMessage(result.message);                   
-            },function(error) {
-                arikaim.page.toastMessage({
-                    class: 'error',
-                    message: error
-                });
-            });
-        });   
-
         arikaim.ui.button('.restore-post',function(element) {   
             var uuid = $(element).attr('uuid');
 
-            blogControlPanel.restorePost(uuid,function(result) {
+            blogApi.restorePost(uuid,function(result) {
                 arikaim.ui.table.removeRow('#row_' + uuid,null,function(element) {
                     $('.trash-button').addClass('disabled');
                 });

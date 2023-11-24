@@ -32,6 +32,7 @@ class Blog extends Extension
         $this->addApiRoute('PUT','/api/blog/post/update/meta','PostApi','updateMetaTags','session');  
         $this->addApiRoute('PUT','/api/blog/post/update/image','PostApi','updateImage','session');  
         $this->addApiRoute('PUT','/api/blog/post/update/summary','PostApi','updateSummary','session');  
+        $this->addApiRoute('DELETE','/api/blog/trash/empty','PostApi','emptyTrash','session');  
         // Blog pages
         $this->addPageRoute('/blog/post/{slug}','Blog','showBlogPost','blog>blog.post',null,'blogPostPage',false);
         // Relation map 

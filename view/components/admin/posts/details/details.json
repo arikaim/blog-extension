@@ -6,6 +6,7 @@
         "slug": "Slug",           
         "title": "Title",             
         "content": "Content",
+        "summary": "Summary",
         "status": "Status"        
     }
 }

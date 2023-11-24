@@ -19,5 +19,15 @@
             "restore": "Can't restore post.",
             "delete": "Can't delete post."
         }      
+    },
+    "messages": {
+        "remove": {
+            "title": "Confirm Remove",
+            "content": "Confirm remove post '<b><% title %></b>'."
+        },
+        "page": {
+            "title": "Confirm Remove",
+            "content": "Confirm remove page '<b><% title %></b>'."
+        }
     }
 }

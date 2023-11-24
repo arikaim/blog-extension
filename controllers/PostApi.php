@@ -37,6 +37,32 @@ class PostApi extends ApiController
     }
 
     /**
+     * Empty trash
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function emptyTrash($request, $response, $data) 
+    {         
+        $data
+            ->validate(true); 
+
+        $result = Model::Posts('blog')
+            ->softDeletedQuery()
+            ->delete();
+
+        if ($result === false) {
+            $this->error('Error delete post');
+            return false;
+        }
+
+        $this
+            ->message('trash.empty');
+    }
+
+    /**
      * Add post
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
@@ -93,6 +119,9 @@ class PostApi extends ApiController
         $userId = $this->getUserId();
         $title = $data->get('title');   
         $uuid =  $data->get('uuid');
+
+        
+
         $post = Model::Posts('blog')->findById($uuid);
         if ($post == null) {
             $this->error('errors.post.id','Not valid post id');
@@ -109,10 +138,6 @@ class PostApi extends ApiController
     
         $result = $post->update($data->toArray());              
     
-        $this->get('service')->with('apimetrics',function($service) use($request) {
-            $service->increment($request);
-        });
-
         $this->setResponse(($result !== false),function() use($post) {                                                       
             $this
                 ->message('post.update')

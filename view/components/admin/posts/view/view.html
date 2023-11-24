@@ -24,14 +24,17 @@
                 <th class="">{{ columns.title }}</th>                         
             </tr>
         </thead>
-        <tbody 
-            id="items_list"          
-            component="blog::admin.posts.view.rows" 
-            namespace="posts">
+        <tbody id="view_items">
             {{ component('blog::admin.posts.view.rows',{ }) }}   
         </tbody>  
     </table>
-    <div class="mt-2">
-        {{ component('semantic~paginator',{ namespace: 'posts' }) }}
+    <div class="my-2" id="paginator">
+        {{  component('semantic~paginator.admin',{ 
+                id: 'blog_post_paginator',
+                rows_selector: 'view_items',
+                component: 'blog::admin.posts.view.rows',
+                namespace: 'posts' 
+            }) 
+        }}
     </div>
 </div>
