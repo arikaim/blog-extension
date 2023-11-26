@@ -19,7 +19,7 @@ use Arikaim\Core\Routes\Route;
  */
 class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterface
 {
-    /**
+   /**
      * Constructor
      *
      */
@@ -38,37 +38,13 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
     {     
         $params = $event->getParameters();
          
-        if ($params['page_name'] == 'blog>blog-post') {
+        if ($params['name'] == 'blogPostPage') {
             return $this->getBlogPostPages($params);       
         }  
-        if ($params['page_name'] == 'blog>blog-category') {
-            return $this->getCategoryPages($params,100);       
-        }  
-
+    
         $url = Route::getRouteUrl($params['pattern']);
 
         return (empty($url) == false) ? [$url] : null;  
-    }
-
-    /**
-     * Get category pages url
-     *
-     * @param array $route
-     * @return array
-     */
-    public function getCategoryPages($route)
-    {
-        $pages = [];
-        $category = Model::Category('category',function($model) {                
-            return $model->getActive()->where('branch','=','blog')->get();           
-        });
-        foreach ($category as $item) {
-            $slug = $item->translation('en')->slug;
-            $url = Route::getRouteUrl($route['pattern'],['slug' => $slug]);
-            $pages[] = $url;
-        }     
-        
-        return $pages;
     }
 
     /**
@@ -79,18 +55,17 @@ class SitemapSubscriber extends EventSubscriber implements EventSubscriberInterf
      */
     public function getBlogPostPages($route)
     {
-        $pages = [];
+        $result = [];
         $posts = Model::Posts('blog')->getActive()->get();               
         
         foreach ($posts as $item) {               
             $url = Route::getRouteUrl($route['pattern'],[
-                'slug'     => $item->slug,
-                'postSlug' => $item->slug
+                'slug' => $item->slug
             ]);
          
-            $pages[] = $url;
+            $result[] = $url;
         }      
 
-        return $pages;
+        return $result;
     }
 }
