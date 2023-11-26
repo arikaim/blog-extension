@@ -1,34 +1,11 @@
-{% set pages = createModel('Pages','blog') %}  
-{% set items = pages.softDeletedQuery().get() %}
-{% set posts = createModel('Posts','blog') %}  
-{% set posts = posts.softDeletedQuery().get() %}
-
-{% if items|length == 0 %}
+{% set posts = createModel('Posts','blog').softDeletedQuery().get() %}  
+{% if posts|length == 0 %}
     <tr>
         <td>..</td>
     </tr>
 {% endif %}
-{% for page in items %}
-    <tr id="row_{{ page.uuid }}">
-        <td>
-            <button class="ui icon button basic restore-page" uuid="{{ page.uuid }}" {{ buttons.restore|attr('title') }}>
-                <i class="trash restore olive alternate icon"></i>
-            </button>    
-        </td>
-        <td>
-            <i class="icon outline alternate file"></i>
-            {{ labels.page }}
-        </td>    
-        <td>
-            {{ page.date_created|dateFormat }}
-        </td>                         
-        <td>
-            {{ page.name }}
-        </td>    
-    </tr>
-{% endfor %}
 {% for post in posts %}
-    <tr id="row_{{ post.uuid }}" class="page-{{ post.page.uuid }}">
+    <tr id="row_{{ post.uuid }}" class="item-{{ post.item.uuid }}">
         <td>
             <button class="ui icon button basic restore-post" uuid="{{ post.uuid }}" {{ buttons.restore|attr('title') }}>
                 <i class="trash restore olive alternate icon"></i>

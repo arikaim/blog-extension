@@ -3,6 +3,7 @@
 {% endif %}
 {% component 'semantic~panel' %}
 <div>
+    {{ component('semantic~view.image',{ model: post }) }}
     <table class="ui very basic definition table">
         <thead>
             <tr>
