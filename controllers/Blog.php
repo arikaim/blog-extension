@@ -28,16 +28,8 @@ class Blog extends Controller
     public function showBlogPostPage($request, $response, $data) 
     {
         $slug = $data->get('slug',null);
-        $postSlug = $data->get('postSlug',null);
-        $pages = Model::Pages('blog');  
-        $posts = Model::Posts('blog');  
+        $post = Model::Posts('blog')->findPost($slug, null);  
 
-        $page = $pages->findBySlug($slug);      
-        if ($page == null) {          
-            return $this->pageNotFound($response,$data->toArray());
-        } 
-
-        $post = $posts->getPost($page->id,$postSlug);
         if ($post == null) {
             return $this->pageNotFound($response,$data->toArray());
         } 
@@ -65,6 +57,6 @@ class Blog extends Controller
             ->applyOgProperty('description',$post->meta_description)                
             ->ogUrl($this->getUrl($request))         
             ->ogType('website') 
-            ->twitterSite($this->getUrl($request));                 
+            ->twitterSite($this->getUrl($request));              
     } 
 }
