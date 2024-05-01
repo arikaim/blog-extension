@@ -23,7 +23,7 @@ class Blog extends Controller
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @return mixed
     */
     public function showBlogPostPage($request, $response, $data) 
     {
@@ -48,9 +48,9 @@ class Blog extends Controller
         $metaTitle = empty($post->meta_title) ? $post->title : $post->meta_title;
 
         $this->get('page')->head()            
-            ->param('title',$metaTitle)
-            ->param('description',$post->meta_description) 
-            ->param('keywords',$post->meta_keywords)      
+            ->set('title',$metaTitle)
+            ->set('description',$post->meta_description) 
+            ->set('keywords',$post->meta_keywords)      
             ->applyTwitterProperty('title',$metaTitle)   
             ->applyTwitterProperty('description',$post->meta_description)   
             ->applyOgProperty('title',$metaTitle)   

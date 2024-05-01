@@ -31,7 +31,7 @@ class PostApi extends ApiController
      */
     public function init()
     {
-        $this->loadMessages('blog::admin.messages');
+        $this->loadMessages('blog::admin.posts.messages');
         $this->setModelClass('Posts');
         $this->setExtensionName('Blog');
     }
@@ -42,7 +42,7 @@ class PostApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @return mixed
     */
     public function emptyTrash($request, $response, $data) 
     {         
@@ -120,8 +120,6 @@ class PostApi extends ApiController
         $title = $data->get('title');   
         $uuid =  $data->get('uuid');
 
-        
-
         $post = Model::Posts('blog')->findById($uuid);
         if ($post == null) {
             $this->error('errors.post.id','Not valid post id');
@@ -185,7 +183,7 @@ class PostApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @return mixed
     */
     public function updateSummaryController($request, $response, $data) 
     {   

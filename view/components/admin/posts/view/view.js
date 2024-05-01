@@ -7,9 +7,10 @@
 'use strict';
 
 function BlogPostsView() {
-    
+    var self = this;
+
     this.init = function() {
-        this.loadMessages('blog::admin.posts');
+        this.loadMessages('blog::admin.posts.messages');
         this.setItemComponentName('blog::admin.posts.view.row');
         this.setItemsSelector('view_items');
         this.setItemSelector('row_');
@@ -32,9 +33,9 @@ function BlogPostsView() {
             modal.confirmDelete({ 
                 title: 'Confirm',
                 description: 'Confirm delete blog post'
-            },() => {
-                blogApi.deletePost(uuid,(result) => {
-                    this.deleteItem(result.uuid);
+            },function() {
+                blogApi.deletePost(uuid,function(result) {
+                    self.deleteItem(result.uuid);
                 });
             });
         });

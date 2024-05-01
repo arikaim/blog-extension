@@ -38,7 +38,7 @@ class Blog extends Extension
         // Relation map 
         $this->addRelationMap('post','Posts');
         // Create db tables
-        $this->createDbTable('PostsSchema');     
+        $this->createDbTable('Posts');     
     }   
 
     /**
