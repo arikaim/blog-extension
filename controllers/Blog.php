@@ -47,6 +47,16 @@ class Blog extends Controller
         $data['uuid'] = $post->uuid;   
         $metaTitle = empty($post->meta_title) ? $post->title : $post->meta_title;
 
+        $this->withService('schema',function($service) use($post) {
+            $service->graph()
+            ->blogPosting()
+            ->addProperties([
+                'title'         => $post->title,
+                'dateCreated'   => $post->date_created
+            ]);
+            $service->addToPageHead();
+        });
+
         $this->get('page')->head()            
             ->set('title',$metaTitle)
             ->set('description',$post->meta_description) 

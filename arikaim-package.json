@@ -3,7 +3,7 @@
     "name": "blog",
     "package-type": "extension",
     "type": "user",
-    "description": "Create blogs.",
+    "description": "Simple and easy-to-use blogs manager.",
     "short-description": "Create blogs.",
     "repository": "https://github.com/arikaim/blog-extension.git",
     "version": "1.6.3",
