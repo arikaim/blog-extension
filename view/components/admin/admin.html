@@ -1,10 +1,27 @@
-{{  component('semantic~tabs',{ 
+{{  component('system:admin.tabs',{ 
         items: [ 
-            { id: 'posts_button', title: labels.posts, component: 'blog::admin.posts', icon: 'list', active: true },                 
-            { id: 'trash_button', title: labels.trash, component: 'blog::admin.trash', icon: 'trash' },    
-            { id: 'settings_button', title: labels.settings, component: 'blog::admin.settings', icon: 'cogs' }
+            {          
+                title: labels.posts, 
+                component: 'blog::admin.posts', 
+                svg_icon: 'icons~newspaper', 
+                active: true 
+            },                 
+            {                
+                title: labels.trash, 
+                component: 'blog::admin.trash', 
+                svg_icon: 'icons~trash' 
+            },    
+            {               
+                title: labels.settings,
+                component: 'blog::admin.settings', 
+                svg_icon: 'icons~cog' 
+            }
         ],
-        menu: { component: 'system:admin.extensions.menu.actions', extension: 'blog' },
-        content: { component: 'blog::admin.posts' } 
+        menu: {            
+            extension: 'blog' 
+        },
+        content: { 
+            component: 'blog::admin.posts' 
+        } 
     })
 }}

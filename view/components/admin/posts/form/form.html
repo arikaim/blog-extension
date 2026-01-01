@@ -1,17 +1,19 @@
 {% if uuid is not empty %}
     {% set post = createModel('Posts','blog').findById(uuid) %}
 {% endif %}
-<form class="ui form" id="editor_form">
+<form class="form" id="editor_form">
     <input type="hidden" value="{{ page }}" name="page" id="page">
     <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">
-    <div class="field">
+    <div class="{{ theme.form.field }}">
         {% if uuid is not empty %}
-            <label>{{ labels.date }}</label>
+            <label class="{{ theme.form.label }}">
+                {{ labels.date }}
+            </label>
             <div class="flex flex-row items-center">
                 {% if post.date_created is not null %}
                 <div class="flex flex-row items-center px-4">
                     <span class="px-2">{{ labels.created }}</span>
-                    <span class="ui basic horizontal label">
+                    <span class="badge badge-sm badge-outline">
                         {{ post.date_created|dateFormat }}
                     </span>
                 </div>
@@ -19,7 +21,7 @@
                 {% if post.date_updated is not null %}
                 <div class="flex flex-row items-center px-4">
                     <span class="px-2">{{ labels.updated }}</span>
-                    <span class="ui basic horizontal label">
+                    <span class="badge badge-sm badge-outline">
                         {{ post.date_updated|dateFormat }}
                     </span>
                 </div>
@@ -28,8 +30,10 @@
         {% endif %}
     </div> 
     <div class="fields">
-        <div class="eleven wide field">
-            <label>{{ labels.title }}</label>
+        <div class="{{ theme.form.field }}">
+            <label class="{{ theme.form.label }}">
+                {{ labels.title }}
+            </label>
             <input 
                 rule="minLength[2]" 
                 id="title"
@@ -38,8 +42,10 @@
                 placeholder="{{ placeholders.title }}" 
                 value="{{ post.title }}">
         </div>
-        <div class="five wide field">
-            <label>{{ labels.status }}</label>
+        <div class="{{ theme.form.field }}">
+            <label class="{{ theme.form.label }}">
+                {{ labels.status }}
+            </label>
             {{ component('blog::admin.status.dropdown',{ id: 'post_status', selected: post.status, uuid: uuid, class: 'p-2' }) }}   
         </div>  
     </div>

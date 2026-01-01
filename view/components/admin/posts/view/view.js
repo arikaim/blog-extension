@@ -11,20 +11,18 @@ function BlogPostsView() {
 
     this.init = function() {
         this.loadMessages('blog::admin.posts.messages');
-        this.setItemComponentName('blog::admin.posts.view.row');
-        this.setItemsSelector('view_items');
-        this.setItemSelector('row_');
+    
         this.initRows();
     };
 
     this.initRows = function() {
         arikaim.ui.loadComponentButton('.post-action');
 
-        $('.status-dropdown').dropdown({
-            onChange: function(value) {
-                var uuid = $(this).attr('uuid');
-                blogApi.setPostStatus(uuid,value);     
-            }
+        $('.status-dropdown').on('change', function() {
+            var val = $(this).val();
+            var uuid = $(this).attr('uuid');
+
+            blogApi.setPostStatus(uuid,val);                
         });
 
         arikaim.ui.button('.delete-post',(element) => {

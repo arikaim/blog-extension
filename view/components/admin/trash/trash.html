@@ -1,23 +1,25 @@
 {% set deletedPages = createModel('Pages','blog').getDeletedCount() %}  
 {% set deletedPosts = createModel('Posts','blog').getDeletedCount() %}
 {% set disabled = ((deletedPages + deletedPosts) == 0) ? 'disabled' : '' %}
-<div class="ui segment  mt-8">
-    <button class="ui basic orange mini button empty-trash {{ disabled }} trash-button" {{ buttons.empty.title|attr('title') }}>
-        <i class="icon trash alternate outline orange"></i>
+<div class="mt-4 {{ theme.panel }}">
+    <button class="{{ theme.buttons.delete }} empty-trash {{ disabled }} trash-button" {{ buttons.empty.title|attr('title') }}>      
         {{ buttons.empty.content }}
     </button>
 </div>
-<div class="ui segment">
-    <table class="ui compact stackable borderless basic table">
-        <thead class="table-head">
+<div class="mt-4 {{ theme.panel }}">
+    <table class="{{ theme.table.default }}">
+        <thead>
             <tr>           
-                <th class="one wide column collapsing">{{ labels.actions }}</th>    
-                <th class="one wide column collapsing">{{ labels.type }}</th> 
-                <th class="two wide column collapsing">{{ labels.created }}</th>                 
-                <th class="collapsing">{{ labels.name }}</th>           
+                <th >{{ labels.actions }}</th>    
+                <th >{{ labels.type }}</th> 
+                <th >{{ labels.created }}</th>                 
+                <th >{{ labels.name }}</th>           
             </tr>
         </thead>
-        <tbody id="items_rows" component="blog::admin.trash.rows" namespace="trash">
+        <tbody 
+            id="items_rows" 
+            component="blog::admin.trash.rows" 
+            namespace="trash">
             {{ component("blog::admin.trash.rows") }}
         </tbody>
     </table>

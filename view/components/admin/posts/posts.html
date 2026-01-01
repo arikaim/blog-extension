@@ -1,23 +1,16 @@
-<div class="ui segment">
-    <div class="ui stackable grid">
-        <div class='ten wide column'>
-            <button 
-                mountTo="details_content"
-                component="blog::admin.posts.add"
-                title="{{ tooltip.create }}"
-                class="ui mini curcular green icon button create-blog-post">
-                <i class="icon plus"></i>
-            </button>
-        </div>
-        <div class="six wide column right aligned">       
-            {{ component('semantic~paginator.dropdown',{ class: 'mini', namespace: 'posts' }) }}
-        </div>
-    </div>
+<div class="mt-4 {{ theme.panel }}">    
+    <button 
+        mountTo="details_content"
+        component="blog::admin.posts.add"
+        title="{{ tooltip.create }}"
+        class="{{ theme.buttons.green }} create-blog-post">
+        {{ buttons.new }}
+    </button>     
 </div>
-<div class="flex flex-row items-start">
-    <div class="w-3/4 pr-4 hidden" id="details_content">
+<div class="mt-4 flex flex-row items-start">
+    <div class="flex-1" id="details_content">
     </div>
-    <div class="flex-grow w-full">
+    <div class="ml-4 flex-grow w-full">
         {{ component('blog::admin.posts.view') }}
     </div>   
 </div>

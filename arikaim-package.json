@@ -6,11 +6,11 @@
     "description": "Simple and easy-to-use blogs manager.",
     "short-description": "Create blogs.",
     "repository": "https://github.com/arikaim/blog-extension.git",
-    "version": "1.6.3",
+    "version": "2.0.0",
     "position": "2",
     "admin-menu": {        
         "title": "Blog",
-        "icon": "blog",
+        "svg_icon": "icons~document.text",
         "page-title": "Blog",
         "page-icon": "blog",       
         "component": "blog::admin"

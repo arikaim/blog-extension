@@ -27,6 +27,8 @@ function TrashControlPanel() {
                 });
             });               
         });
+
+        this.initRows();
     };
 
     this.loadRows = function() {
@@ -61,6 +63,5 @@ function TrashControlPanel() {
 var trashView = createObject(TrashControlPanel,ControlPanelView);
 
 arikaim.component.onLoaded(function() {
-    trashView.init();
-    trashView.initRows();
+    trashView.init();   
 });

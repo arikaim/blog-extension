@@ -5,14 +5,18 @@
     </tr>
 {% endif %}
 {% for post in posts %}
-    <tr id="row_{{ post.uuid }}" class="item-{{ post.item.uuid }}">
+    <tr 
+        id="row_{{ post.uuid }}" 
+        class="item-{{ post.item.uuid }}">
         <td>
-            <button class="ui icon button basic restore-post" uuid="{{ post.uuid }}" {{ buttons.restore|attr('title') }}>
-                <i class="trash restore olive alternate icon"></i>
+            <button 
+                class="{{ theme.buttons.green }} restore-post" 
+                uuid="{{ post.uuid }}" 
+                {{ buttons.restore|attr('title') }}>
+                {{ component('icons~info',theme.icons.green,'svg') }}              
             </button>    
         </td>
-        <td>
-            <i class="icon pen fancy"></i>
+        <td>         
             {{ labels.post }}
         </td>    
         <td>

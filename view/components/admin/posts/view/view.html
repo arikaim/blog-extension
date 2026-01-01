@@ -1,5 +1,5 @@
-<div class="ui segment">
-    <table class="ui compact stackable borderless basic table">
+<div class="{{ theme.panel }}">
+    <table class="{{ theme.table.default }}">
         <thead>
             <tr class="table-head">                          
                 <th class="three wide">{{ columns.action }}</th>
@@ -14,7 +14,7 @@
         </tbody>  
     </table>
     <div class="my-1" id="paginator">
-        {{  component('semantic~paginator.admin',{ 
+        {{  component('system:admin.paginator',{ 
                 id: 'blog_post_paginator',
                 rows_selector: 'view_items',
                 component: 'blog::admin.posts.view.rows',
