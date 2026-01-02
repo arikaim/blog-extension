@@ -1,46 +1,50 @@
 {% if uuid is not empty %}
     {% set post = createModel('Posts','blog').findById(uuid) %}  
 {% endif %}
-{% component 'semantic~panel' %}
-<div>
+{% component 'system:admin.panel' %}  
+    {% set parent = 'show' %}
     {{ component('semantic~view.image',{ model: post }) }}
-    <table class="ui very basic definition table">
+    <table class="{{ theme.table.details }}">
         <thead>
             <tr>
-                <th class="three wide"></th>
-                <th></th>
+                <th class="w-1/4"></th>
+                <th class="w-3/4"></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="right aligned">{{ labels.id }}</td>
+                <td class="{{ theme.table.field.label }}">
+                    {{ labels.id }}
+                </td>
                 <td>
-                    <div class="ui basic label">
+                    <div class="badge badge-sm badge-outline">
                         {{ post.id }}
                     </div>
-                    {{ post.uuid }}
+                    <span class="mx-2">
+                        {{ post.uuid }}
+                    </span>                    
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.status }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.status }}</td>
                 <td>
-                    {{ component('semantic~status.label',{ status: post.status }) }}                   
+                    {{ component('system:admin.status.label',{ status: post.status }) }}                   
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.title }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.title }}</td>
                 <td>
                     {{ post.title }}
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.slug }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.slug }}</td>
                 <td>
                     {{ post.slug }}
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">
+                <td class="{{ theme.table.field.label }}">
                     {{ labels.content }}
                 </td>
                 <td>                   
@@ -48,7 +52,7 @@
                 </td>
             </tr>   
             <tr>
-                <td class="right aligned">
+                <td class="{{ theme.table.field.label }}">
                     {{ labels.summary }}
                 </td>
                 <td>                   
@@ -57,6 +61,5 @@
             </tr>                   
         </tbody>  
     </table>     
-    {{ component('semantic~view.metatags',{ model: post }) }}    
-</div>
+    {{ component('system:admin.view.metatags',{ model: post }) }}    
 {% endcomponent %}

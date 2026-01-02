@@ -1,5 +1,9 @@
 {% if status == 1 %}
-<i class="icon olive check {{ class }}" title="{{ labels.published }}"></i>
+<span title="{{ labels.published }}">
+    {{ component('icons~check',theme.icons.green,'svg') }}
+</span>
 {% else %}
-<i class="icon pencil ruler orange {{ class }}" title="{{ labels.draft }}"></i>
+<span title="{{ labels.draft }}">
+    {{ component('icons~edit',theme.icons.menu,'svg') }}
+</span>
 {% endif %}

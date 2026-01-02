@@ -7,30 +7,35 @@
             title="{{ buttons.details }}"
             mountTo="details_content"
             component="blog::admin.posts.details"
-            class="ui icon mini compact basic button post-action" 
+            class="{{ theme.buttons.icon }} post-action" 
             params="uuid:{{ item.uuid }}">
-            <i class="icon info"></i>
+            {{ component('icons~info',theme.icons.menu,'svg') }}           
         </button>       
         <button 
             title="{{ buttons.edit }}"
             mountTo="details_content"
             component="blog::admin.posts.edit"
             params="uuid:{{ item.uuid }}"
-            class="ui icon mini compact basic button post-action">
-            <i class="icon edit"></i>
+            class="{{ theme.buttons.icon }} post-action">
+            {{ component('icons~edit',theme.icons.menu,'svg') }}      
         </button>
         <button 
             title="{{ buttons.delete }}"
-            class="ui icon basic mini compact button delete-post" 
+            class="{{ theme.buttons.icon }} delete-post" 
             uuid="{{ item.uuid }}">
-            <i class="icon trash orange"></i>
+            {{ component('icons~trash',theme.icons.delete,'svg') }}                  
         </button>                          
     </td>
     <td>
         {{ item.date_created|dateFormat }}
     </td>
     <td>
-        {{ component('blog::admin.status.dropdown',{ selected: item.status, uuid: item.uuid }) }} 
+        {{  component('blog::admin.status.dropdown',{ 
+                selected: item.status, 
+                class: 'select-xs w-64',
+                uuid: item.uuid 
+            }) 
+        }} 
     </td>
     <td>
         {{ item.title }}

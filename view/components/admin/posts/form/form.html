@@ -1,6 +1,8 @@
 {% if uuid is not empty %}
     {% set post = createModel('Posts','blog').findById(uuid) %}
 {% endif %}
+{% set category = createModel('Category','category').getList(null,'blog') %}
+
 <form class="form" id="editor_form">
     <input type="hidden" value="{{ page }}" name="page" id="page">
     <input type="hidden" value="{{ uuid }}" name="uuid" id="uuid">
@@ -29,12 +31,13 @@
             </div>
         {% endif %}
     </div> 
-    <div class="fields">
+    <div class="{{ theme.form.fields }}">
         <div class="{{ theme.form.field }}">
             <label class="{{ theme.form.label }}">
                 {{ labels.title }}
             </label>
             <input 
+                class="{{ theme.form.input }}"
                 rule="minLength[2]" 
                 id="title"
                 name="title" 
@@ -46,13 +49,19 @@
             <label class="{{ theme.form.label }}">
                 {{ labels.status }}
             </label>
-            {{ component('blog::admin.status.dropdown',{ id: 'post_status', selected: post.status, uuid: uuid, class: 'p-2' }) }}   
+            {{  component('blog::admin.status.dropdown',{ 
+                    id: 'post_status', 
+                    selected: post.status, 
+                    uuid: uuid
+                }) 
+            }}   
         </div>  
     </div>
     {% if uuid is not empty %}
-    <div class="field">
-        <label>{{ labels.category }}</label>
-        {% set category = createModel('Category','category').getList(null,'blog') %}
+    <div class="{{ theme.form.field }}">
+        <label class="{{ theme.form.label }}">
+            {{ labels.category }}
+        </label>      
         {{  component('system:admin.orm.relations.fields.dropdown',{ 
                 model: 'CategoryRelations',
                 extension: 'category',
@@ -64,8 +73,11 @@
         }}   
     </div>
     {% endif %}
-    <div class="field">
-        <textarea name="content" id="editor">{{ post.content }}</textarea>     
+    <div class="mt-4 {{ theme.form.field }}">
+        <textarea 
+            class="{{ theme.form.textarea }}" 
+            name="content" 
+            id="editor">{{ post.content }}</textarea>     
     </div>
-    {{ component('semantic~form.footer') }}    
+    {{ component('system:form.footer') }}    
 </form>

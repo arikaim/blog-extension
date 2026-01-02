@@ -2,14 +2,12 @@
 
 arikaim.component.onLoaded(function() {
     
-    /*
-    $('#post_status').dropdown({
-        onChange: function(value) {           
-            var uuid = $(this).attr('uuid');         
-            blogApi.setPostStatus(uuid,value);
-        }       
+    $('#post_status').on('change', function() {
+        var val = $(this).val();
+        var uuid = $(this).attr('uuid');         
+        
+        blogApi.setPostStatus(uuid,val);         
     });
-    */
    
     arikaim.ui.form.onSubmit("#editor_form",function() {  
         return blogApi.updatePost('#editor_form',function(result) {
