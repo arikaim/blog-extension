@@ -1,11 +1,17 @@
 {% set post = createModel('Posts','blog').findById(uuid) %}
-<div class="w-full">
-    <form class="ui form" id="post_summary_form">
-        <input type="hidden" value="{{ post.uuid }}" name="uuid" id="uuid">
-        <div class="field">
-            <label>{{ labels.summary }}</label>
-            <textarea rows="3" cols="3" name="summary" id="summary">{{ post.summary }}</textarea>    
-        </div>                     
-        {{ component('semantic~form.footer') }}                    
-    </form>
-</div>
+
+<form class="form" id="post_summary_form">
+    <input type="hidden" value="{{ post.uuid }}" name="uuid" id="uuid">
+    <div class="{{ theme.form.field }}">
+        <label class="{{ theme.form.label }}">
+            {{ labels.summary }}
+        </label>
+        <textarea 
+            class="{{ theme.form.textarea }}"
+            rows="3" 
+            cols="3" 
+            name="summary" 
+            id="summary">{{ post.summary }}</textarea>    
+    </div>                     
+    {{ component('system:form.footer') }}                    
+</form>

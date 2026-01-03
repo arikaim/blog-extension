@@ -9,14 +9,14 @@
                 <th class="">{{ columns.user }}</th>                      
             </tr>
         </thead>
-        <tbody id="view_items">
+        <tbody id="post_items">
             {{ component('blog::admin.posts.view.rows',{ }) }}   
         </tbody>  
     </table>
-    <div class="my-1" id="paginator">
+    <div class="my-2 ml-2" id="paginator">
         {{  component('system:admin.paginator',{ 
                 id: 'blog_post_paginator',
-                rows_selector: 'view_items',
+                rows_selector: 'post_items',
                 component: 'blog::admin.posts.view.rows',
                 namespace: 'posts' 
             }) 

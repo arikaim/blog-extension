@@ -16,3 +16,9 @@
         {{ component('blog::admin.posts.view') }}
     </div>   
 </div>
+
+{{  component('system:admin.modal.confirm',{
+        id: 'post_delete_modal',
+        content: messages.delete
+    }) 
+}}

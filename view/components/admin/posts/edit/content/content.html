@@ -2,9 +2,9 @@
     <div class="flex flex-col flex-grow ">
         <div class="content-end place-content-end self-end">
             <button 
-                class="ui mini icon circular blue button nlp-button" 
+                class="{{ theme.buttons.icon }} nlp-button" 
                 title="{{ labels.nlp }}">
-                <i class="lightbulb outline icon"></i>
+                {{ component('icons~info',theme.icons.menu,'svg') }}            
             </button>
         </div>
         {{ component('blog::admin.posts.form',{ uuid: uuid }) }}

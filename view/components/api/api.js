@@ -8,13 +8,11 @@ function BlogApi() {
         return arikaim.delete('/api/blog/post/delete/' + uuid,onSuccess,onError);          
     };
 
-    this.setPostStatus = function(uuid, status, onSuccess, onError) {
-        var data = {
+    this.setPostStatus = function(uuid, status, onSuccess, onError) { 
+        return arikaim.put('/api/blog/post/status',{
             uuid: uuid,
             status: status
-        };
-        
-        return arikaim.put('/api/blog/post/status',data,onSuccess,onError);          
+        },onSuccess,onError);          
     };
 
     this.updatePostSummary = function(data, onSuccess, onError) {
@@ -34,11 +32,9 @@ function BlogApi() {
     };
     
     this.restorePost = function(uuid, onSuccess, onError) {
-        var data = {
+        return arikaim.put('/api/blog/post/restore',{
             uuid: uuid
-        };
-
-        return arikaim.put('/api/blog/post/restore',data,onSuccess,onError);          
+        },onSuccess,onError);          
     };
 
     this.emptyTrash = function(onSuccess, onError) {

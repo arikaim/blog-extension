@@ -1,6 +1,11 @@
 {% set posts = createModel('Posts','blog').getNotDeletedQuery() %}
 {% set items = paginate(posts,'posts') %}
 
+{% if items.getItems()|length == 0 %}
+    <tr id="empty">
+        <td colspan="5">...</td>
+    </tr>
+{% endif %}
 {% for item in items.getItems() %}
     {{ component('blog::admin.posts.view.row',{ item: item }) }}
 {% endfor %}

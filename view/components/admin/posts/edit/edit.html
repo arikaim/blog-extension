@@ -8,6 +8,7 @@
     {% set parent = 'show' %}
 
     {{  component('system:admin.tabs',{ 
+            id: 'blog_edit_tabs',         
             items: [ 
                 {          
                     title: labels.content, 
@@ -35,9 +36,12 @@
                     svg_icon: 'icons~code' 
                 }
             ],
-            content: { 
-                id: 'blog_edit_tab',
-                component: 'blog::admin.posts.edit.content' 
+            content: {   
+                id: 'blog_edit_tabs_edit',             
+                component: 'blog::admin.posts.edit.content',
+                params: {
+                    uuid: uuid
+                }
             } 
         })
     }}   

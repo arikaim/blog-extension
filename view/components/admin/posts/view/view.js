@@ -12,6 +12,9 @@ function BlogPostsView() {
     this.init = function() {
         this.loadMessages('blog::admin.posts.messages');
     
+        this.setItemsSelector('post_items');
+        this.setItemComponentName('blog::admin.posts.view.row');
+
         this.initRows();
     };
 
@@ -27,11 +30,8 @@ function BlogPostsView() {
 
         arikaim.ui.button('.delete-post',(element) => {
             var uuid = $(element).attr('uuid');
-       
-            modal.confirmDelete({ 
-                title: 'Confirm',
-                description: 'Confirm delete blog post'
-            },function() {
+            
+            arikaim.ui.getComponent('post_delete_modal').open(function() {
                 blogApi.deletePost(uuid,function(result) {
                     self.deleteItem(result.uuid);
                 });
@@ -53,5 +53,4 @@ var blogPostView = new createObject(BlogPostsView,ControlPanelView);
 
 arikaim.component.onLoaded(function() {
     blogPostView.init();
-    arikaim.ui.loadComponentButton('.create-blog-post');
 });

@@ -1,5 +1,8 @@
 {
     "buttons": {
         "new": "New Post"
+    },
+    "messages": {
+        "delete": "Confirm delete blog post"
     }
 }

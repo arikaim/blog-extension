@@ -12,20 +12,17 @@ function TrashControlPanel() {
     this.init = function() {
         this.loadMessages();
 
-        arikaim.ui.button('.empty-trash',function(element) {       
-            return modal.confirmDelete({ 
-                title: self.getMessage('empty.title'),
-                description: self.getMessage('empty.description') 
-            },function() {         
-                blogApi.emptyTrash(function(result) {
-                    self.loadRows();
-                },function(error) {
-                    arikaim.page.toastMessage({
-                        class: 'error',
-                        message: error
+        arikaim.ui.button('.empty-trash',function(element) {   
+            arikaim.ui.getComponent('empty_trash_modal').open(function() {         
+                    blogApi.emptyTrash(function(result) {
+                        self.loadRows();
+                    },function(error) {
+                        arikaim.page.toastMessage({
+                            class: 'error',
+                            message: error
+                        });
                     });
-                });
-            });               
+            });            
         });
 
         this.initRows();
@@ -49,12 +46,9 @@ function TrashControlPanel() {
                 arikaim.ui.table.removeRow('#row_' + uuid,null,function(element) {
                     $('.trash-button').addClass('disabled');
                 });
-                arikaim.page.toastMessage(result.message);                   
+                arikaim.ui.getComponent('toast').show(result.message);                       
             },function(error) {
-                arikaim.page.toastMessage({
-                    class: 'error',
-                    message: error
-                });
+                arikaim.ui.getComponent('toast').show(result.error);               
             });
         });   
     };
