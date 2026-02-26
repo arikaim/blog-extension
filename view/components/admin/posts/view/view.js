@@ -10,6 +10,7 @@ function BlogPostsView() {
     var self = this;
 
     this.init = function() {
+        self = this;
         this.loadMessages('blog::admin.posts.messages');
     
         this.setItemsSelector('post_items');
@@ -33,7 +34,7 @@ function BlogPostsView() {
             
             arikaim.ui.getComponent('post_delete_modal').open(function() {
                 blogApi.deletePost(uuid,function(result) {
-                    self.deleteItem(result.uuid);
+                    blogPostView.deleteItem(result.uuid);
                 });
             });
         });

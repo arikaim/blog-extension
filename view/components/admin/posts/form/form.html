@@ -59,10 +59,12 @@
     </div>
     {% if uuid is not empty %}
         <div class="{{ theme.form.field }}">
+            <!--
             <label class="{{ theme.form.label }}">
                 {{ labels.category }}
             </label>      
-            {{  component('system:admin.orm.relations.fields.dropdown',{ 
+            -->
+            {#  component('system:admin.orm.relations.fields.dropdown',{ 
                     model: 'CategoryRelations',
                     extension: 'category',
                     type: 'post',
@@ -70,7 +72,7 @@
                     items: category,
                     class: 'mt-2'
                 }) 
-            }}   
+            #}   
         </div>
     {% endif %}
     <div class="mt-4 {{ theme.form.field }}">

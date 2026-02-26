@@ -3,7 +3,8 @@
 {% endif %}
 {% component 'system:admin.panel' %}  
     {% set parent = 'show' %}
-    {{ component('semantic~view.image',{ model: post }) }}
+    {{ component('system:admin.view.image',{ model: post }) }}
+
     <table class="{{ theme.table.details }}">
         <thead>
             <tr>
